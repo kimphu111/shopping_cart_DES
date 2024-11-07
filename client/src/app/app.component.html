@@ -1,0 +1,41 @@
+<nav class="navbar">
+  <!-- Phần bên trái với logo -->
+  <div class="navbar-left">
+    <a href=""><img src="assets/logo.png" /></a>
+  </div>
+
+  <!-- Phần giữa với các liên kết điều hướng -->
+  <div class="navbar-center">
+    <a [routerLink]="['/']" routerLinkActive="active">Trang Chủ</a>
+    <a [routerLink]="['/album1']" routerLinkActive="active">Bán Áo Quần</a>
+    <a [routerLink]="['/album2']" routerLinkActive="active">Bán Phụ Kiện</a>
+  </div>
+
+
+  <!-- Phần bên phải với tìm kiếm và profile -->
+  <div class="navbar-right">
+    <button class="search-btn"><mat-icon>search</mat-icon></button>
+    <button class="profile-btn"><mat-icon>person</mat-icon></button>
+  </div>
+</nav>
+<router-outlet></router-outlet>
+<footer class="footer">
+  <div class="footer-logo">
+    <a href="">
+      <img src="assets/logo.png" />
+    </a>
+  </div>
+
+  <p>Thành viên nhóm</p>
+  <p>Hứa Huỳnh Kim Phú - 22205004s - FE</p>
+  <p>Điền Văn Thành - 22206708 - BE</p>
+  <p>Nguyễn Mai Thảo Nguyên - 22206208 - BA</p>
+  <p>Phạm Nguyễn Gia Thuần - 22204631 - BA</p>
+  <p>Nguyễn Minh Hải - 22101603 - BA</p>
+  <p>Lý Vĩnh Tuấn - 22207438 - BA</p>
+  <p>Liên hệ số điện thoại đặt hàng</p>
+  <p>(039)4099688(Phú)</p>
+
+
+</footer>
+
