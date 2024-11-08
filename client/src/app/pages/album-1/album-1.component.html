@@ -1,99 +1,129 @@
-<div class="container-album1">
+<!--<div class="container-album1">-->
 
-  <div class="top-album1">
-    <h5><a href="" ><mat-icon>home</mat-icon></a>   Album Bán Áo Quần</h5>
-    <p>Danh sách sản phẩm áo quần.</p>
-  </div>
+<!--  <div class="top-album1">-->
+<!--    <h5><a href="" ><mat-icon>home</mat-icon></a>   Album Bán Áo Quần</h5>-->
+<!--    <p>Danh sách sản phẩm áo quần.</p>-->
+<!--  </div>-->
 
-  <div class="search-container">
-    <input
-      #searchInput
-      type="text"
-      placeholder="Tìm kiếm sản phẩm..."
-      (input)="searchProducts(searchInput.value)" />
+<!--  <div class="search-container">-->
+<!--    <input-->
+<!--      #searchInput-->
+<!--      type="text"-->
+<!--      placeholder="Tìm kiếm sản phẩm..."-->
+<!--      (input)="searchProducts(searchInput.value)" />-->
 
-    <div class="product-list">
-      <div *ngFor="let product of filteredProducts" class="product-item">
-        <p class="product-name">{{ product.name }}</p>
-        <p class="product-price">{{ product.price }}</p>
+<!--    <div class="product-list">-->
+<!--      <div *ngFor="let product of filteredProducts" class="product-item">-->
+<!--        <p class="product-name">{{ product.name }}</p>-->
+<!--        <p class="product-price">{{ product.price }}</p>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+
+
+
+<!--  <div class="product-grid">-->
+<!--    &lt;!&ndash; Sản phẩm 1 &ndash;&gt;-->
+<!--    <div class="product-item">-->
+<!--      <img src="https://via.placeholder.com/250" alt="Sản phẩm 1" />-->
+<!--      <p class="price">500,000₫</p>-->
+<!--    </div>-->
+
+<!--    &lt;!&ndash; Sản phẩm 2 &ndash;&gt;-->
+<!--    <div class="product-item">-->
+<!--      <img src="https://via.placeholder.com/250" alt="Sản phẩm 2" />-->
+<!--      <p class="price">450,000₫</p>-->
+<!--    </div>-->
+
+<!--    &lt;!&ndash; Sản phẩm 3 &ndash;&gt;-->
+<!--    <div class="product-item">-->
+<!--      <img src="https://via.placeholder.com/250" alt="Sản phẩm 3" />-->
+
+<!--      <p class="price">400,000₫</p>-->
+<!--    </div>-->
+
+<!--    &lt;!&ndash; Sản phẩm 4 &ndash;&gt;-->
+<!--    <div class="product-item">-->
+<!--      <img src="https://via.placeholder.com/250" alt="Sản phẩm 4" />-->
+<!--      <p class="price">550,000₫</p>-->
+<!--    </div>-->
+
+<!--    &lt;!&ndash; Sản phẩm 5 &ndash;&gt;-->
+<!--    <div class="product-item">-->
+<!--      <img src="https://via.placeholder.com/250" alt="Sản phẩm 5" />-->
+<!--      <p class="price">600,000₫</p>-->
+<!--    </div>-->
+
+<!--    &lt;!&ndash; Sản phẩm 6 &ndash;&gt;-->
+<!--    <div class="product-item">-->
+<!--      <img src="https://via.placeholder.com/250" alt="Sản phẩm 6" />-->
+<!--      <p class="price">650,000₫</p>-->
+<!--    </div>-->
+
+<!--    &lt;!&ndash; Sản phẩm 7 &ndash;&gt;-->
+<!--    <div class="product-item">-->
+<!--      <img src="https://via.placeholder.com/250" alt="Sản phẩm 7" />-->
+<!--      <p class="price">500,000₫</p>-->
+<!--    </div>-->
+
+<!--    &lt;!&ndash; Sản phẩm 8 &ndash;&gt;-->
+<!--    <div class="product-item">-->
+<!--      <img src="https://via.placeholder.com/250" alt="Sản phẩm 8" />-->
+<!--      <p class="price">750,000₫</p>-->
+<!--    </div>-->
+
+<!--    &lt;!&ndash; Sản phẩm 9 &ndash;&gt;-->
+<!--    <div class="product-item">-->
+<!--      <img src="https://via.placeholder.com/250" alt="Sản phẩm 9" />-->
+<!--      <p class="price">800,000₫</p>-->
+<!--    </div>-->
+
+<!--    &lt;!&ndash; Sản phẩm 10 &ndash;&gt;-->
+<!--    <div class="product-item">-->
+<!--      <img src="https://via.placeholder.com/250" alt="Sản phẩm 10" />-->
+<!--      <p class="price">700,000₫</p>-->
+<!--    </div>-->
+
+<!--    &lt;!&ndash; Sản phẩm 11 &ndash;&gt;-->
+<!--    <div class="product-item">-->
+<!--      <img src="https://via.placeholder.com/250" alt="Sản phẩm 11" />-->
+<!--      <p class="price">850,000₫</p>-->
+<!--    </div>-->
+
+<!--    &lt;!&ndash; Sản phẩm 12 &ndash;&gt;-->
+<!--    <div class="product-item">-->
+<!--      <img src="https://via.placeholder.com/250" alt="Sản phẩm 12" />-->
+<!--      <p class="price">900,000₫</p>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+
+
+
+
+  <div class="container-album1">
+    <div class="top-album1">
+      <h5><a href=""><mat-icon>home</mat-icon></a> Album Bán Áo Quần</h5>
+      <p>Danh sách sản phẩm áo quần.</p>
+    </div>
+
+    <div class="search-container">
+      <input
+        #searchInput
+        type="text"
+        placeholder="Tìm kiếm sản phẩm..."
+        (input)="searchProducts(searchInput.value)" />
+
+      <!-- Popup kết quả tìm kiếm -->
+      <div class="product-grid">
+        <div *ngFor="let product of filteredProducts" class="product-item">
+          <img [src]="product.image" alt="{{ product.name }}" />
+          <p class="product-name">{{ product.name }}</p>
+          <p class="price">{{ product.price | currency: 'VND' }}</p>
+        </div>
       </div>
     </div>
+
   </div>
 
 
-
-  <div class="product-grid">
-    <!-- Sản phẩm 1 -->
-    <div class="product-item">
-      <img src="https://via.placeholder.com/250" alt="Sản phẩm 1" />
-      <p class="price">500,000₫</p>
-    </div>
-
-    <!-- Sản phẩm 2 -->
-    <div class="product-item">
-      <img src="https://via.placeholder.com/250" alt="Sản phẩm 2" />
-      <p class="price">450,000₫</p>
-    </div>
-
-    <!-- Sản phẩm 3 -->
-    <div class="product-item">
-      <img src="https://via.placeholder.com/250" alt="Sản phẩm 3" />
-
-      <p class="price">400,000₫</p>
-    </div>
-
-    <!-- Sản phẩm 4 -->
-    <div class="product-item">
-      <img src="https://via.placeholder.com/250" alt="Sản phẩm 4" />
-      <p class="price">550,000₫</p>
-    </div>
-
-    <!-- Sản phẩm 5 -->
-    <div class="product-item">
-      <img src="https://via.placeholder.com/250" alt="Sản phẩm 5" />
-      <p class="price">600,000₫</p>
-    </div>
-
-    <!-- Sản phẩm 6 -->
-    <div class="product-item">
-      <img src="https://via.placeholder.com/250" alt="Sản phẩm 6" />
-      <p class="price">650,000₫</p>
-    </div>
-
-    <!-- Sản phẩm 7 -->
-    <div class="product-item">
-      <img src="https://via.placeholder.com/250" alt="Sản phẩm 7" />
-      <p class="price">500,000₫</p>
-    </div>
-
-    <!-- Sản phẩm 8 -->
-    <div class="product-item">
-      <img src="https://via.placeholder.com/250" alt="Sản phẩm 8" />
-      <p class="price">750,000₫</p>
-    </div>
-
-    <!-- Sản phẩm 9 -->
-    <div class="product-item">
-      <img src="https://via.placeholder.com/250" alt="Sản phẩm 9" />
-      <p class="price">800,000₫</p>
-    </div>
-
-    <!-- Sản phẩm 10 -->
-    <div class="product-item">
-      <img src="https://via.placeholder.com/250" alt="Sản phẩm 10" />
-      <p class="price">700,000₫</p>
-    </div>
-
-    <!-- Sản phẩm 11 -->
-    <div class="product-item">
-      <img src="https://via.placeholder.com/250" alt="Sản phẩm 11" />
-      <p class="price">850,000₫</p>
-    </div>
-
-    <!-- Sản phẩm 12 -->
-    <div class="product-item">
-      <img src="https://via.placeholder.com/250" alt="Sản phẩm 12" />
-      <p class="price">900,000₫</p>
-    </div>
-  </div>
-</div>

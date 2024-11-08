@@ -1,3 +1,8 @@
+/* Ẩn thanh cuộn ngang và dọc */
+body, html {
+  overflow: hidden;
+}
+
 .navbar {
   display: flex;
   align-items: center;

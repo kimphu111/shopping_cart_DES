@@ -1,5 +1,29 @@
-<div class="album2">
-  <h1>Album Bán Phụ Kiện</h1>
-  <p>Danh sách sản phẩm phụ kiện.</p>
-  <!-- Thêm mã HTML để hiển thị danh sách phụ kiện -->
+<div class="container-album2">
+  <div class="top-album2">
+    <h5><a href=""><mat-icon>home</mat-icon></a> Album Bán phụ kiện</h5>
+    <p>Danh sách sản phẩm phụ kiện.</p>
+  </div>
+
+  <div class="search-container">
+    <input
+      #searchInput
+      type="text"
+      placeholder="Tìm kiếm sản phẩm..."
+      (input)="searchProducts(searchInput.value)" />
+
+    <!-- Popup kết quả tìm kiếm -->
+    <div class="product-grid">
+      <div *ngFor="let product of filteredProducts" class="product-item">
+        <img [src]="product.image" alt="{{ product.name }}" />
+        <p class="product-name">{{ product.name }}</p>
+        <p class="price">{{ product.price | currency: 'VND' }}</p>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
 </div>
