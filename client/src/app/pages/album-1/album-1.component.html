@@ -1,4 +1,4 @@
-<!--<div class="container-album1">-->
+<div class="container-album1">
 
 <!--  <div class="top-album1">-->
 <!--    <h5><a href="" ><mat-icon>home</mat-icon></a>   Album Bán Áo Quần</h5>-->
@@ -115,7 +115,7 @@
         (input)="searchProducts(searchInput.value)" />
 
       <!-- Popup kết quả tìm kiếm -->
-      <div class="product-grid">
+      <div class="product-grid" [routerLink]="['/detail/:id']">
         <div *ngFor="let product of filteredProducts" class="product-item">
           <img [src]="product.image" alt="{{ product.name }}" />
           <p class="product-name">{{ product.name }}</p>

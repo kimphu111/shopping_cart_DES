@@ -12,7 +12,8 @@ export const routes: Routes = [
   { path :'album2', component : Album2_Component},
   { path :'login',component: LoginComponent},
   { path :'detail',component: DetailProductComponent},
-  { path : 'detail/:id', component: DetailProductComponent},
+  { path :'detail/:id', component: DetailProductComponent},
+  { path :'login',component: LoginComponent},
 
   { path : '**', redirectTo: '' } // quay ve khi k tim thay trang
 
