@@ -7,6 +7,6 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 
 bootstrapApplication(AppComponent, {
   providers: [
-    importProvidersFrom(AppRoutesModule), provideAnimationsAsync() // Nhập providers từ AppRoutesModule nếu cần
+    importProvidersFrom(AppRoutesModule), provideAnimationsAsync(), provideAnimationsAsync() // Nhập providers từ AppRoutesModule nếu cần
   ]
 }).catch((err) => console.error(err));
