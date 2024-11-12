@@ -11,15 +11,15 @@
     <a [routerLink]="['/album2']" routerLinkActive="active">Bán Phụ Kiện</a>
   </div>
 
-
   <!-- Phần bên phải với tìm kiếm và profile -->
   <div class="navbar-right">
     <button class="search-btn"><mat-icon>search</mat-icon></button>
-    <button class="profile-btn"><mat-icon>person</mat-icon></button>
+    <button class="profile-btn" [routerLink]="['/login']" ><mat-icon>person</mat-icon></button>
   </div>
 </nav>
 <router-outlet></router-outlet>
-<footer class="footer">
+
+<footer class="footer"> 
   <div class="footer-logo">
     <a href="">
       <img src="assets/logo.png" />

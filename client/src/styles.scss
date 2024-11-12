@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 
+<<<<<<< HEAD
 html, body { height: 100%;
   overflow-x: hidden; /* Ngăn cuộn ngang */
   overflow-y: auto; /* Cho phép cuộn dọc */
@@ -10,3 +11,10 @@ html::-webkit-scrollbar, body::-webkit-scrollbar {
 }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;}
 
+=======
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+>>>>>>> f8f12d8125a2e12a440d34890ce678ecfb2a6373

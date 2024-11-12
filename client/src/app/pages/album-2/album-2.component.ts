@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {MatIcon} from '@angular/material/icon';
 import {CurrencyPipe, NgForOf} from '@angular/common';
+import {RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-album-2',
@@ -8,7 +9,8 @@ import {CurrencyPipe, NgForOf} from '@angular/common';
   imports: [
     MatIcon,
     CurrencyPipe,
-    NgForOf
+    NgForOf,
+    RouterLink
   ],
   templateUrl: './album-2.component.html',
   styleUrl: './album-2.component.scss'
