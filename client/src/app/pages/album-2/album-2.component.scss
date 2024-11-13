@@ -29,7 +29,7 @@
 }
 
 input[type="text"] {
-  width: 91vw;
+  width: 90vw;
   padding: 20px;
   margin-left: 20px;
   font-size: 16px;
@@ -56,8 +56,8 @@ input[type="text"] {
 .product-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
   margin-top: 20px;
+  gap:15px;
   justify-content: center;
   padding-left: 20px;
   -ms-overflow-style: none; /* Ẩn thanh cuộn trong Internet Explorer và Edge */
@@ -66,10 +66,6 @@ input[type="text"] {
 
 .product-grid::-webkit-scrollbar {
   display: none;
-}
-
-.product-grid {
-
 }
 
 .product-item {
@@ -83,16 +79,19 @@ input[type="text"] {
   flex-direction: column;
   align-items: center;
   background-color: #f8f8f8;
-  padding: 15px;
+  padding: 20px;
   box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   margin-bottom: 40px;
 }
 
 .product-item:hover {
-  transform: translateY(-10px); /* Dịch chuyển sản phẩm lên trên */
+  transform: translateY(-20px); /* Dịch chuyển sản phẩm lên trên */
   box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2); /* Tăng độ đổ bóng để tạo hiệu ứng nổi */
+  cursor: pointer;
+
 }
+
 
 .product-item img {
   width: 250px;

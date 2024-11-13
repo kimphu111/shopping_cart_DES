@@ -10,16 +10,17 @@
       type="text"
       placeholder="Tìm kiếm sản phẩm..."
       (input)="searchProducts(searchInput.value)" />
+  </div>
 
     <!-- Popup kết quả tìm kiếm -->
     <div class="product-grid" [routerLink]="['/detail/:id']">
-      <div *ngFor="let product of filteredProducts" class="product-item">
+      <div *ngFor="let product of filteredProducts" class="product-item" (click)="onSelectProduct(product)">
         <img [src]="product.image" alt="{{ product.name }}" />
         <p class="product-name">{{ product.name }}</p>
         <p class="price">{{ product.price | currency: 'VND' }}</p>
       </div>
     </div>
-  </div>
+
 
 
 
