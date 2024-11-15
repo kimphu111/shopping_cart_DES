@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {MatIconModule} from '@angular/material/icon';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatButtonModule} from '@angular/material/button';
-import {ProductService} from '../../products.service';
+import {ProductService} from '../../../service/products.service';
 import {Product} from '../../models/product.model';
 import {Product2} from '../../models/product.model';
 import { CommonModule } from '@angular/common';
@@ -11,6 +11,7 @@ import {ActivatedRoute} from '@angular/router';
 interface DisplayProduct {
   id: number;
   name: string;
+  quantity: number;
   price: number;
   image: string;
   type: 'product' | 'product2'; // Xác định loại sản phẩm
@@ -34,13 +35,13 @@ export class DetailProductComponent implements OnInit {
               private route : ActivatedRoute
   ) {}
 
-  increaseQuantity() {
-    this.quantity++;
+  increaseQuantity(productItem: any) {
+    productItem.quantity++;
   }
 
-  decreaseQuantity() {
-    if (this.quantity > 1) {
-      this.quantity--;
+  decreaseQuantity(productItem: any) {
+    if (productItem.quantity > 0) {
+      productItem.quantity--;
     }
   }
   ngOnInit() {

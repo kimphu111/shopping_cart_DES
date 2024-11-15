@@ -1,6 +1,5 @@
 <head>
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
-
 </head>
 
 <div id="container" *ngFor="let productItem of displayProducts">
@@ -16,7 +15,14 @@
       <div id="top-right">
         <h3>{{ productItem.name }}</h3>
         <p><b>{{ productItem.price | currency: 'VND' }}</b></p>
-
+        <div id="adjust-product">
+               <button mat-mini-fab id="plus" class="adjust-btn" (click)="decreaseQuantity(productItem)" ><mat-icon>remove</mat-icon></button> 
+                <span>{{productItem.quantity}}</span>
+               <button mat-mini-fab id="minus" class="adjust-btn" (click)="increaseQuantity(productItem)" ><mat-icon>add</mat-icon></button>
+        </div>
+              <p id="p-status">Còn hàng</p> <!--Product status-->
+              <button mat-flat-button id="add-to-cart">Thêm vào giỏ hàng</button>
+    
         <!-- Kiểm tra loại sản phẩm để hiển thị thông tin -->
         <p *ngIf="productItem.type === 'product'">Mã sản phẩm (product): {{ productItem.id }}</p>
         <p *ngIf="productItem.type === 'product2'">Mã sản phẩm (product2): {{ productItem.id }}</p>
