@@ -20,7 +20,8 @@
                 <span>{{productItem.quantity}}</span>
                <button mat-mini-fab id="minus" class="adjust-btn" (click)="increaseQuantity(productItem)" ><mat-icon>add</mat-icon></button>
         </div>
-              <p id="p-status">Còn hàng</p> <!--Product status-->
+              <p id="p-status" *ngIf="productItem.quantity > 0">Còn hàng</p> <!--Product status-->
+              <p id="p-status" *ngIf="productItem.quantity === 0">Hết hàng</p> <!--Product status-->
               <button mat-flat-button id="add-to-cart">Thêm vào giỏ hàng</button>
     
         <!-- Kiểm tra loại sản phẩm để hiển thị thông tin -->
