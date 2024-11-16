@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 import { CurrencyPipe, NgForOf, NgIf } from '@angular/common';
 import { RouterLink, Router } from '@angular/router';
-import { ProductService } from '../../products.service';
+import { ProductService } from '../../../service/products.service';
 import { Product } from '../../models/product.model'; // Import Product model
 
 @Component({
