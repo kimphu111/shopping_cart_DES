@@ -11,6 +11,7 @@ import {ActivatedRoute} from '@angular/router';
 interface DisplayProduct {
   id: number;
   name: string;
+  quantity: number;
   price: number;
   image: string;
   type: 'product' | 'product2'; // Xác định loại sản phẩm
@@ -34,13 +35,13 @@ export class DetailProductComponent implements OnInit {
               private route : ActivatedRoute
   ) {}
 
-  increaseQuantity() {
-    this.quantity++;
+  increaseQuantity(productItem: any) {
+    productItem.quantity++;
   }
 
-  decreaseQuantity() {
-    if (this.quantity > 1) {
-      this.quantity--;
+  decreaseQuantity(productItem: any) {
+    if (productItem.quantity > 0) {
+      productItem.quantity--;
     }
   }
   ngOnInit() {
@@ -48,11 +49,16 @@ export class DetailProductComponent implements OnInit {
       const type = params['type'];
       if (type === 'product') {
         const product = this.productService.getSelectedProduct();
-        if (product) this.displayProducts = [{ ...product, type: 'product' }];
+        if (product) {
+          this.displayProducts = [{ ...product, quantity: this.quantity, type: 'product' }];
+        }
       } else if (type === 'product2') {
         const product2 = this.productService.getSelectedProduct2();
-        if (product2) this.displayProducts = [{ ...product2, type: 'product2' }];
+        if (product2) {
+          this.displayProducts = [{ ...product2, quantity: this.quantity, type: 'product2' }];
+        }
       }
     });
   }
+
 }
