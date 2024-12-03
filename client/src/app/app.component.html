@@ -6,7 +6,7 @@
 
   <!-- Phần giữa với các liên kết điều hướng -->
   <div class="navbar-center">
-    <a [routerLink]="['/']" routerLinkActive="active">Trang Chủ</a>
+    <a [routerLink]="['/']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Trang Chủ</a>
     <a [routerLink]="['/album1']" routerLinkActive="active">Bán Áo Quần</a>
     <a [routerLink]="['/album2']" routerLinkActive="active">Bán Phụ Kiện</a>
   </div>
@@ -19,18 +19,6 @@
 
   </div>
 
-<!--&lt;!&ndash;  Popup tìm kiếm&ndash;&gt;-->
-<!--  <div class="search-popup" *ngIf="isSearchPopupVisible">-->
-<!--    <div class="search-popup-content">-->
-<!--        <input-->
-<!--        #popupSearchInput-->
-<!--        type="text"-->
-<!--        placeholder="Nhập tên sản phẩm..."-->
-<!--        (input)="searchProducts(popupSearchInput.value)"-->
-<!--        />-->
-<!--    </div>-->
-
-<!--  </div>-->
 </nav>
 <router-outlet></router-outlet>
 

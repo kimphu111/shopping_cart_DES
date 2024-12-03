@@ -20,7 +20,11 @@ export const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    RouterModule.forRoot(routes, {
+      scrollPositionRestoration: 'enabled', // Tự động cuộn lên đầu khi điều hướng
+    }),
+  ],
   exports: [RouterModule],
 })
 

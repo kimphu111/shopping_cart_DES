@@ -9,6 +9,7 @@
   flex-direction: column;
   gap: 20px;
 
+
   @media (max-width: 768px) {
     padding: 15px;
   }
@@ -154,4 +155,8 @@
   &.out-of-stock {
     color: #e74c3c;
   }
+}
+
+.p-status-out{
+
 }
