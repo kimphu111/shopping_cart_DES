@@ -12,4 +12,9 @@ import {MatIcon} from '@angular/material/icon';
 })
 export class AppComponent {
   title = 'client';
+  isSearchPopupVisible: any;
+
+  searchProducts(value: string) {
+
+  }
 }

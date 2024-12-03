@@ -1,25 +1,19 @@
-import { Component, OnInit } from '@angular/core';
-import { MatIcon } from '@angular/material/icon';
-import { CurrencyPipe, NgForOf, NgIf } from '@angular/common';
-import { RouterLink, Router } from '@angular/router';
-import { ProductService } from '../../products.service';
-import { Product } from '../../models/product.model'; // Import Product model
+import {Product} from '../../models/product.model';
+import {Component, OnInit} from '@angular/core';
+import {MatIcon} from '@angular/material/icon';
+import {CurrencyPipe, NgForOf, NgIf} from '@angular/common';
+import {Router, RouterLink} from '@angular/router';
+import {ProductService} from '../../products.service';
 
 @Component({
   selector: 'app-album-1',
   standalone: true,
-  imports: [
-    MatIcon,
-    NgForOf,
-    NgIf,
-    CurrencyPipe,
-    RouterLink
-  ],
+  imports: [MatIcon, NgForOf, NgIf, CurrencyPipe, RouterLink],
   templateUrl: './album-1.component.html',
   styleUrls: ['./album-1.component.scss']
 })
 export class Album1_Component implements OnInit {
-  products: Product[] = []; // Khai báo kiểu Product[]
+  products: Product[] = [];
   filteredProducts: Product[] = [];
 
   constructor(private readonly productService: ProductService, private router: Router) {}
@@ -41,7 +35,6 @@ export class Album1_Component implements OnInit {
 
   onSelectProduct(product: Product) {
     this.productService.setSelectedProduct(product);
-    this.router.navigate(['/detail'], { queryParams: { type: 'product' } });
+    this.router.navigate(['/detail'], { queryParams: { id: product.id, type: 'product' } });
   }
-
 }
