@@ -7,6 +7,8 @@ import {Album1_Component} from './pages/album-1/album-1.component';
 import {Album2_Component} from './pages/album-2/album-2.component';
 import {LoginComponent} from './pages/login/login.component';
 import {DetailProductComponent} from './pages/detail-product/detail-product.component';
+import { AdminComponent } from './pages/admin/admin.component';
+import { UserProfileComponent } from './pages/user-profile/user-profile.component';
 
 
 @NgModule({
@@ -21,7 +23,9 @@ import {DetailProductComponent} from './pages/detail-product/detail-product.comp
     Album1_Component,
     Album2_Component,
     LoginComponent,
-    DetailProductComponent
+    DetailProductComponent,
+    AdminComponent,
+    UserProfileComponent
   ],
   providers: [],
 })
