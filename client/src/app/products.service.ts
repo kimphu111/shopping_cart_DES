@@ -74,4 +74,9 @@
       return this.selectedProduct2;
     }
 
+    searchProducts(query: string) {
+      const lowerQuery = query.toLowerCase();
+      return [...this.products, ...this.product2].filter(product => product.name.toLowerCase().includes(lowerQuery));
+
+    }
   }

@@ -1,24 +1,27 @@
 <head>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"> <!-- Include FontAwesome CDN -->
 </head>
-<div id="container">
+<div id="container-login">
     <div id="login">
-        <h1>Login</h1>
+        <h1 class="login-text">Login</h1>
         <form  id="login-form">
-            <p>Username: </p>
+            <p>Username<span style="color: red">*</span> </p>
             <input type="text" name="username" placeholder="Enter Username" required>
 
-            <p>Password: </p>
+            <p>Password<span style="color: red">*</span> </p>
             <input type="password" name="password" placeholder="Enter Password" required>
+
             <div id="middle">
-            <button mat-flat-button id="login-btn">Login</button>
-            <span id="forget-password">Forget password?</span>
+            <button mat-flat-button id="login-btn">Sign in</button>
             </div>
-            <p>Don't have an account? <span id="new">Create new</span><p>
-            <p id="or">Or login with</p>
-            <button mat-flat-button id="Sign-in-btn"><i id="g-icon" class="fab fa-google"></i>Sign in with Google</button>
+
+          <div class="createAccount">
+            <p>Don't have an account ? <p>
+            <a href="/register">Create Account</a>
+          </div>
+
         </form>
         </div>
-        
+
 </div>
 

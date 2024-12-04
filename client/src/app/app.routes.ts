@@ -5,6 +5,7 @@ import {Album2_Component} from './pages/album-2/album-2.component';
 import {NgModule} from '@angular/core';
 import {LoginComponent} from './pages/login/login.component';
 import {DetailProductComponent} from './pages/detail-product/detail-product.component';
+import {RegisterComponent} from './pages/register/register.component';
 
 export const routes: Routes = [
   { path :'',component: HomeComponent},
@@ -14,6 +15,8 @@ export const routes: Routes = [
   { path :'detail',component: DetailProductComponent},
   { path :'detail/:id', component: DetailProductComponent},
   { path :'login',component: LoginComponent},
+  { path :'register',component: RegisterComponent},
+
 
   { path : '**', redirectTo: '' } // quay ve khi k tim thay trang
 
