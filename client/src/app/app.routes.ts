@@ -6,6 +6,7 @@ import {NgModule} from '@angular/core';
 import {LoginComponent} from './pages/login/login.component';
 import {DetailProductComponent} from './pages/detail-product/detail-product.component';
 
+
 export const routes: Routes = [
   { path :'',component: HomeComponent},
   { path :'album1', component : Album1_Component},
@@ -14,13 +15,18 @@ export const routes: Routes = [
   { path :'detail',component: DetailProductComponent},
   { path :'detail/:id', component: DetailProductComponent},
   { path :'login',component: LoginComponent},
+  { path :'admin', loadChildren: () => import('./pages/admin-page/admin-routing.module').then(m => m.AdminRoutingModule)},
 
   { path : '**', redirectTo: '' } // quay ve khi k tim thay trang
 
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    RouterModule.forRoot(routes, {
+      scrollPositionRestoration: 'enabled', // Tự động cuộn lên đầu khi điều hướng
+    }),
+  ],
   exports: [RouterModule],
 })
 

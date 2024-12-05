@@ -10,7 +10,6 @@
     <a [routerLink]="['/album1']" routerLinkActive="active">Bán Áo Quần</a>
     <a [routerLink]="['/album2']" routerLinkActive="active">Bán Phụ Kiện</a>
     <a [routerLink]="['/admin']" routerLinkActive="active" >Admin</a>
-    <a [routerLink]="['/user-profile']" routerLinkActive="active">User</a>
   </div>
 
   <!-- Phần bên phải với tìm kiếm và profile -->
@@ -21,18 +20,6 @@
 
   </div>
 
-<!--&lt;!&ndash;  Popup tìm kiếm&ndash;&gt;-->
-<!--  <div class="search-popup" *ngIf="isSearchPopupVisible">-->
-<!--    <div class="search-popup-content">-->
-<!--        <input-->
-<!--        #popupSearchInput-->
-<!--        type="text"-->
-<!--        placeholder="Nhập tên sản phẩm..."-->
-<!--        (input)="searchProducts(popupSearchInput.value)"-->
-<!--        />-->
-<!--    </div>-->
-
-<!--  </div>-->
 </nav>
 <router-outlet></router-outlet>
 

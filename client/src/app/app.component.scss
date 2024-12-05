@@ -6,7 +6,8 @@ body, html {
 .navbar {
   display: flex;
   align-items: center;
-  padding: 0;
+  justify-content: space-between;
+  padding: 0 0;
   background-color: #343A40;
   height: 90px;
   width: 100vw;
@@ -18,15 +19,15 @@ body, html {
 }
 
 .navbar-left{
-  padding: 0 0 0 200px;
+  padding: 0 0 0 100px;
 }
 
 .navbar-center{
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-left: 380px;
-  gap: 30px;
+  padding-left: 0;
+  gap: 0px;
   a{
     font-size: 20px;
     font-weight: 300;
@@ -34,8 +35,8 @@ body, html {
 }
 
 .navbar-right{
-  padding-left: 400px;
-  gap: 30px;
+  padding-right: 100px;
+  //gap: 30px;
 }
 
   img {
@@ -75,12 +76,12 @@ a {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  padding: 70px 30px;
+  padding: 50px 30px;
   gap: 0;
   top: 0;
   left: 0;
   width: 100vw;
-  height: 500px;
+  height: fit-content;
   background-color: #454A4C;
   overflow: hidden;
   p{
@@ -141,6 +142,13 @@ a {
   background-color: #d32f2f;
 }
 
-.active {
-  color: #ff554b;
+@media (max-width:1570px) {
+  .navbar-center{
+    padding-left: 300px;
+  }
+  .navbar-right{
+    padding-left: 300px;
+  }
+
 }
+
