@@ -9,16 +9,15 @@ const routes: Routes = [
     path: '',
     component: AdminComponent,
     children: [
-      { path: '', redirectTo: 'user', pathMatch: 'full' },
+      {path: '', redirectTo: 'user', pathMatch: 'full'},
       { path: 'billing', component: AdminBillingComponent },
       { path: 'user', component: AdminUserComponent },
       // Add more child routes here
     ]
   }
 ];
-
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class AdminRoutingModule { }
+export class Admin_Routes { }

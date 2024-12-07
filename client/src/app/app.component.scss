@@ -26,39 +26,106 @@ body, html {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-left: 0;
+  padding-right: 65px;
   gap: 0px;
   a{
-    font-size: 20px;
-    font-weight: 300;
+    font-size: 25px;
+    font-weight: 400;
+    margin-right: 20px;
   }
 }
 
 .navbar-right{
+
+  .search-btn{
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    color: white;
+
+    mat-icon{
+      color: white;
+  }
+    }
   padding-right: 100px;
-  //gap: 30px;
+  input{
+    margin: 20px;
+    &:hover,
+    &.active {
+      color: #ff00af;
+    }
+  }
 }
 
+/* Overlay mờ phía sau */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Màu đen với độ mờ */
+  z-index: 999;
+}
+
+/* Thanh tìm kiếm */
+.search-bar {
+  position: fixed;
+  top:60px;
+  width: 90%;
+  height: 50px;
+  background: linear-gradient(90deg, #ff7b7b, #9b59b6, #2ecc71);
+  background-size: 400% 400%; /* Kích thước gradient để tạo hiệu ứng chuyển động */
+  animation: gradientBackground 10s ease infinite; /* Hiệu ứng chuyển màu */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 30px 15px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 20px;
+
+  input {
+    flex: 1;
+    padding: 30px 12px;
+    font-size: 26px;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: white;
+  }
+
+  button {
+    margin-left: 10px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+  }
+}
   img {
     width: 200px;
     height: 160px;
   }
+
 .navbar-center {
   gap: 20px;
-}
-a {
-  text-decoration: none;
-  color: white;
-  font-size: 1rem;
-
-  &:hover,
-  &.active {
-    color: #ff554b;
+  a {
+    text-decoration: none;
+    color: white;
+    font-size: 22px;
+    font-weight: 370;
+    transition: 0.3s;
+    &:hover,
+    &.active {
+      color: #ff00af;
+    }
   }
 }
 
-.search-btn,
-.profile-btn {
+ .profile-btn {
   background-color: transparent;
   border: none;
   cursor: pointer;
@@ -66,9 +133,7 @@ a {
   color: white;
   margin-left: 15px;
 
-  &:hover {
-    color: #ff554b;
-  }
+
 }
 
 .footer {
@@ -139,7 +204,7 @@ a {
 }
 
 .close-btn:hover {
-  background-color: #d32f2f;
+  background-color: #c759e0;
 }
 
 @media (max-width:1570px) {

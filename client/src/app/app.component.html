@@ -12,12 +12,32 @@
     <a [routerLink]="['/admin']" routerLinkActive="active" >Admin</a>
   </div>
 
-  <!-- Phần bên phải với tìm kiếm và profile -->
-  <div class="navbar-right">
-    <button class="search-btn"><mat-icon>search</mat-icon></button>
-    <button class="profile-btn" [routerLink]="['/login']" ><mat-icon>person</mat-icon></button>
-<!--    <button class="profile-btn" [routerLink]="['/detail']" ><mat-icon>collections</mat-icon></button>-->
 
+
+  <div class="navbar-right">
+
+    <!-- Nút kính lúp -->
+    <button mat-icon-button class="search-btn" (click)="toggleSearchBar()">
+      <mat-icon>search</mat-icon>
+    </button>
+
+    <!-- Overlay mờ -->
+    <div class="overlay" *ngIf="isSearchPopupVisible" (click)="closeSearchPopup()"></div>
+
+    <!-- Popup tìm kiếm -->
+    <div class="search-bar" *ngIf="isSearchPopupVisible">
+      <input
+        type="text"
+        placeholder="Nhập tên sản phẩm..."
+        [(ngModel)]="searchQuery"
+        (keydown.enter)="searchProducts(searchQuery)"
+      />
+      <button mat-icon-button (click)="closeSearchPopup()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+
+    <a class="profile-btn" routerLink="/login" routerLinkActive="active"><mat-icon>person</mat-icon></a>
   </div>
 
 </nav>
@@ -39,7 +59,6 @@
   <p>Lý Vĩnh Tuấn - 22207438 - BA</p>
   <p>Liên hệ số điện thoại đặt hàng</p>
   <p>(039)4099688(Phú)</p>
-
 
 </footer>
 
