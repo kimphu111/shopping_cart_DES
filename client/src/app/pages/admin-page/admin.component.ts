@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { MatIconModule } from '@angular/material/icon';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 
 
 @Component({
   selector: 'app-admin',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, MatIconModule, RouterLink, RouterLinkActive ],
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.scss'
 })

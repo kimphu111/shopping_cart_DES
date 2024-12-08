@@ -1,29 +1,31 @@
-import { Component,OnInit  } from '@angular/core';
-import {NavigationEnd, RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
-import {HomeComponent} from './pages/home/home.component';
-import {MatIcon} from '@angular/material/icon';
-import {Router} from '@angular/router';
-import {NgIf} from '@angular/common';
-import {MatIconButton} from '@angular/material/button';
-import {ProductService} from './products.service';
-import {FormsModule} from '@angular/forms';
+import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
+import { isPlatformBrowser } from '@angular/common';
+import { HomeComponent } from './pages/home/home.component';
+import { MatIcon } from '@angular/material/icon';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { ProductService } from './products.service';
+import { NgIf } from '@angular/common';
+import { MatIconButton } from '@angular/material/button';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet, HomeComponent, RouterLink, MatIcon, RouterLinkActive, NgIf, MatIconButton, FormsModule],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements  OnInit{
-  constructor(private route: Router,
-              private productService: ProductService,
-
-              ) {}
-
+export class AppComponent implements OnInit {
   title = 'client';
   isSearchPopupVisible: any;
   searchQuery = '';
+
+  constructor(
+    private route: Router,
+    private productService: ProductService,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {}
 
   toggleSearchBar() {
     this.isSearchPopupVisible = !this.isSearchPopupVisible; // Bật/tắt thanh tìm kiếm
@@ -43,10 +45,11 @@ export class AppComponent implements  OnInit{
   }
 
   ngOnInit() {
-    //Ham cuon len dau trang khi chuyen trang
     this.route.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
-        window.scrollTo({top:0, behavior:'smooth'});
+        if (isPlatformBrowser(this.platformId)) {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
       }
     });
   }

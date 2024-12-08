@@ -1,9 +1,12 @@
 <div class="container-album2">
+
   <div class="top-album2">
     <h5><a href=""><mat-icon>home</mat-icon></a> Album Bán phụ kiện</h5>
     <p>Danh sách sản phẩm phụ kiện.</p>
   </div>
 
+
+<div class="mid-album2">
   <div class="search-container">
     <input
       #searchInput
@@ -12,15 +15,19 @@
       (input)="searchProducts(searchInput.value)" />
   </div>
 
-    <!-- Popup kết quả tìm kiếm -->
-    <div class="product-grid" [routerLink]="['/detail/:id']">
-      <div *ngFor="let product of filteredProducts" class="product-item" (click)="onSelectProduct(product)">
-        <img [src]="product.image" alt="{{ product.name }}" />
-        <p class="product-name">{{ product.name }}</p>
-<!--        <p class="product-quantity">{{ product.quantity}}</p>-->
-        <p class="price">{{ product.price | currency: 'VND' }}</p>
-      </div>
+  <!-- Popup kết quả tìm kiếm -->
+  <div class="product-grid" [routerLink]="['/detail/:id']">
+    <div *ngFor="let product of filteredProducts" class="product-item" (click)="onSelectProduct(product)">
+      <img [src]="product.image" alt="{{ product.name }}" />
+      <p class="product-name">{{ product.name }}</p>
+      <!--        <p class="product-quantity">{{ product.quantity}}</p>-->
+      <p class="price">{{ product.price | currency: 'VND' }}</p>
     </div>
+  </div>
+</div>
+
+
+
 
 
 
