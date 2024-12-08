@@ -120,6 +120,7 @@
     background-color: #ddd;
     cursor: pointer;
     transition: background 0.3s, transform 0.3s;
+    color: black;
 
     &:hover {
       background-image: linear-gradient(45deg, #a68ed2, #f274e1);

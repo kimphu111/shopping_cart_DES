@@ -1,0 +1,16 @@
+<div id="container">
+    <div id="sidebar">
+        <div id="title">
+            <img src="assets/avatar_pic/꒰𝙰𝚒 𝙰𝚛𝚝꒱ Wallpaper.jpg" alt="Ảnh đại diện">
+            <p><b>Name</b></p>
+        </div>
+        <div id="sidebar_item">
+            <ul>
+                <li [routerLink]="['user']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"><mat-icon>person</mat-icon>User</li>
+                <li [routerLink]="['billing']" routerLinkActive="active"><mat-icon>payments</mat-icon>Billing</li>
+            </ul>
+
+        </div>
+    </div>
+    <router-outlet></router-outlet>
+</div>
