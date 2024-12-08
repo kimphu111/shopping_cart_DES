@@ -8,6 +8,9 @@ import {Album2_Component} from './pages/album-2/album-2.component';
 import {LoginComponent} from './pages/login/login.component';
 import {DetailProductComponent} from './pages/detail-product/detail-product.component';
 import {RouterModule} from '@angular/router';
+import { AdminUserComponent } from './pages/admin-page/admin-user/admin-user.component';
+import { AdminBillingComponent } from './pages/admin-page/admin-billing/admin-billing.component';
+import { AdminComponent } from './pages/admin-page/admin.component';
 
 
 @NgModule({
@@ -25,7 +28,10 @@ import {RouterModule} from '@angular/router';
     Album1_Component,
     Album2_Component,
     LoginComponent,
-    DetailProductComponent
+    DetailProductComponent,
+    AdminUserComponent,
+    AdminBillingComponent,
+    AdminComponent,
   ],
   providers: [],
 })
