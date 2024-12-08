@@ -9,12 +9,11 @@
     <a [routerLink]="['/']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Trang Chủ</a>
     <a [routerLink]="['/album1']" routerLinkActive="active">Quần Áo</a>
     <a [routerLink]="['/album2']" routerLinkActive="active"> Phụ Kiện</a>
+
+
   </div>
 
-
-
   <div class="navbar-right">
-
     <!-- Nút kính lúp -->
     <button mat-icon-button class="search-btn" (click)="toggleSearchBar()">
       <mat-icon>search</mat-icon>
@@ -36,7 +35,7 @@
       </button>
     </div>
 
-    <a class="profile-btn" routerLink="/login" routerLinkActive="active"><mat-icon>person</mat-icon></a>
+    <a class="profile-btn" [routerLink]="['/login']" routerLinkActive="active"><mat-icon>person</mat-icon></a>
   </div>
 
 </nav>

@@ -8,7 +8,7 @@
   })
   export class ProductService {
     products: Product[] = [
-      { id: 1, name: 'Áo sơ mi nam', quantity: 2, price: 100000, image: 'https://via.placeholder.com/150' },
+      { id: 1, name: 'Áo sơ mi nam', quantity: 2, price: 100000, image: 'src/assets/silde1.jpg' },
       { id: 2, name: 'Áo thun nữ', quantity: 5, price: 150000, image: 'https://via.placeholder.com/150' },
       { id: 3, name: 'Áo khoác nam', quantity: 3, price: 300000, image: 'https://via.placeholder.com/150' },
       { id: 4, name: 'Áo len nữ', quantity: 7, price: 250000, image: 'https://via.placeholder.com/150' },
@@ -32,7 +32,7 @@
 
 
     product2: Product2[] = [
-      { id: 1, name: 'Túi xách nữ', quantity: 2, price: 100000, image: 'https://via.placeholder.com/150' },
+      { id: 1, name: 'Túi xách nữ', quantity: 2, price: 100000, image: 'src/assets/silde1.jpg' },
       { id: 2, name: 'Kính mát nam', quantity: 5, price: 150000, image: 'https://via.placeholder.com/150' },
       { id: 3, name: 'Vòng tay nữ', quantity: 3, price: 200000, image: 'https://via.placeholder.com/150' },
       { id: 4, name: 'Dây chuyền nam', quantity: 4, price: 180000, image: 'https://via.placeholder.com/150' },
@@ -60,17 +60,29 @@
 
     setSelectedProduct(product: Product) {
       this.selectedProduct = product;
+      localStorage.setItem('selectedProduct', JSON.stringify(product));
     }
 
     getSelectedProduct(): Product | null {
-      return this.selectedProduct;
+      if (this.selectedProduct) {
+        return this.selectedProduct;
+      }
+
+      const storedProduct = localStorage.getItem('selectedProduct');
+      return storedProduct ? JSON.parse(storedProduct) : null;
     }
 
     setSelectedProduct2(product: Product2) {
       this.selectedProduct2 = product;
+      // Lưu vào localStorage
+      localStorage.setItem('selectedProduct2', JSON.stringify(product));
     }
 
     getSelectedProduct2(): Product2 | null {
+      if (this.selectedProduct2 === null) {
+        const product = localStorage.getItem('selectedProduct2');
+        this.selectedProduct2 = product ? JSON.parse(product) : null;
+      }
       return this.selectedProduct2;
     }
 

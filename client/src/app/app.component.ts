@@ -47,10 +47,16 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.route.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
+        console.log('NavigationEnd event triggered');
         if (isPlatformBrowser(this.platformId)) {
-          window.scrollTo({ top: 0, behavior: 'smooth' });
+          setTimeout(() => {
+            window.scrollTo(0, 0);
+          }, 0);
         }
       }
     });
   }
+
+
+
 }

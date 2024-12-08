@@ -4,7 +4,33 @@
   flex-direction: column;
   background-color: #F1F0EC;
   overflow: hidden;
-  padding: 90px 0;
+  padding: 160px 0;
+}
+
+.carousel-item {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.carousel-item img {
+  max-width: 1000px;
+  max-height: 400px;
+  height: auto;
+  position: relative;
+  transition: transform 10s ease-in-out;
+}
+
+.carousel-indicators {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  display: flex;
+  justify-content: center;
 }
 
 .top-album2 {

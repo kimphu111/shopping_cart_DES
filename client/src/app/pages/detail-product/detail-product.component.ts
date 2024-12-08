@@ -47,22 +47,38 @@ export class DetailProductComponent implements OnInit {
       productItem.userQuantity--;
     }
   }
+
   ngOnInit() {
+    this.loadProduct();
+    // Lắng nghe các thay đổi của queryParams
     this.route.queryParams.subscribe(params => {
       const type = params['type'];
-
       if (type === 'product') {
         const product = this.productService.getSelectedProduct();
         if (product) {
-          this.displayProducts = [{ ...product,userQuantity:1, type: 'product' }];
+          this.displayProducts = [{ ...product, userQuantity: 1, type: 'product' }];
         }
       } else if (type === 'product2') {
         const product2 = this.productService.getSelectedProduct2();
         if (product2) {
-          this.displayProducts = [{ ...product2, userQuantity:1, type: 'product2' }];
+          this.displayProducts = [{ ...product2, userQuantity: 1, type: 'product2' }];
         }
       }
+      // Lưu sản phẩm vào localStorage để đảm bảo dữ liệu được bảo tồn
+      localStorage.setItem('currentProduct', JSON.stringify(this.displayProducts));
     });
+
+    // Nếu có dữ liệu trong localStorage, khôi phục lại
+    const cachedProduct = localStorage.getItem('currentProduct');
+    if (cachedProduct) {
+      this.displayProducts = JSON.parse(cachedProduct);
+    }
+    console.log(this.displayProducts); // Kiểm tra giá trị tại đây
+  }
+
+  loadProduct(): void {
+    this.product = this.productService.getSelectedProduct();
+    console.log('Selected Product:', this.product);
   }
 
 }
