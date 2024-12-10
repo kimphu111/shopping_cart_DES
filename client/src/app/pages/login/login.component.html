@@ -5,11 +5,11 @@
     <div id="login">
         <h1 class="login-text">Login</h1>
         <form  id="login-form">
-            <p>Username<span style="color: red">*</span> </p>
-            <input type="text" name="username" placeholder="Enter Username" required>
+          <p>Username<span style="color: red">*</span></p>
+          <input type="text" name="username" [(ngModel)]="username" placeholder="Enter Username" required>
 
-            <p>Password<span style="color: red">*</span> </p>
-            <input type="password" name="password" placeholder="Enter Password" required>
+          <p>Password<span style="color: red">*</span></p>
+          <input type="password" name="password" [(ngModel)]="password" placeholder="Enter Password" required>
 
             <div id="middle">
             <button mat-flat-button id="login-btn">Sign in</button>

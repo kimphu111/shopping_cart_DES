@@ -10,6 +10,7 @@ body, html {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  text-align: center;
   background-color: #343A40;
   height: 120px;
   width: 100%; /* Đảm bảo navbar luôn chiếm toàn bộ chiều rộng màn hình */
@@ -21,10 +22,16 @@ body, html {
   box-sizing: border-box; /* Đảm bảo padding không làm thay đổi kích thước */
 }
 
+
 .navbar-left, .navbar-center, .navbar-right {
   display: flex;
   align-items: center;
   justify-content: center;  /* Căn giữa các phần tử trong từng vùng */
+  img {
+    width: 200px;
+    height: 130px;
+  }
+
 }
 
 .navbar-center {
@@ -40,7 +47,7 @@ body, html {
   transition: 0.3s;
 }
 
-.navbar-center a:hover, .navbar-center a.active {
+.navbar-center a:hover, .navbar-center a.active  {
   color: #ff00af;
 }
 
@@ -100,10 +107,52 @@ body, html {
   cursor: pointer;
 }
 
-img {
-  width: 200px;
-  max-width: 100%; /* Đảm bảo logo không bị vượt quá kích thước màn hình */
+.profile-btn {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+
+  mat-icon {
+    color: white; /* Màu mặc định */
+    transition: color 0.3s ease; /* Mượt mà khi đổi màu */
+    font-size: 24px;
+    font-weight: bold;
+  }
+
+  /* Khi hover vào icon */
+  &:hover mat-icon {
+    color: #ff00af; /* Màu hồng khi hover */
+  }
+
+  /* Khi click vào icon */
+  &.active mat-icon {
+    background: linear-gradient(90deg, #ff007f, #8a2be2, #000000);
+    background-size: 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradient-animation 2.5s linear infinite; /* Gradient động */
+  }
+
+  /* Keyframes cho gradient động */
+  @keyframes gradient-animation {
+    0% {
+      background-position: 0%;
+    }
+    50% {
+      background-position: 100%;
+    }
+    100% {
+      background-position: 0%;
+    }
+  }
 }
+
+
+
 
 .footer {
   display: flex;
@@ -113,6 +162,8 @@ img {
   padding: 50px 30px;
   background-color: #454A4C;
   width: 100%;
+  color: white;
+  gap: 10px;
 }
 
 .footer-logo img {
