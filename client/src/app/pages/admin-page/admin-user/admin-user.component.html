@@ -9,11 +9,11 @@
                     <th>Adress</th>
                     <th>Status</th>
                 </tr>
-                <tr class="user-data">
-                    <td class="user-info">John Doe</td>
-                    <td class="user-info">123456789</td>
-                    <td class="user-info">1234 Main St</td>
-                    <td class="user-info action-btn">Unblock</td>
+                <tr class="user-data" *ngFor="let user of users">
+                    <td class="user-info">{{ user.userName }}</td>
+                    <td class="user-info">{{ user.phone }}</td>
+                    <td class="user-info">{{ user.address }}</td>
+                    <td class="user-info action-btn">{{user.status}}</td>
                 </tr>
             </thead>
         </table>
