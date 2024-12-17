@@ -11,9 +11,12 @@
           <p>Password<span style="color: red">*</span></p>
           <input type="password" name="password" [(ngModel)]="password" placeholder="Enter Password" required>
 
-            <div id="middle">
-            <button mat-flat-button id="login-btn">Sign in</button>
-            </div>
+          <div id="middle">
+            <button mat-flat-button id="login-btn" (click)="onLogin()" type="button">
+              Sign in
+            </button>
+          </div>
+
 
           <div class="createAccount">
             <p>Don't have an account ? <p>

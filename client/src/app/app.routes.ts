@@ -6,7 +6,7 @@ import {NgModule} from '@angular/core';
 import {LoginComponent} from './pages/login/login.component';
 import {DetailProductComponent} from './pages/detail-product/detail-product.component';
 import {RegisterComponent} from './pages/register/register.component';
-import {AdminModule} from './pages/admin-page/admin.module';
+// import {AdminModule} from './pages/admin-page/admin.module';
 
 
 export const routes: Routes = [
@@ -16,7 +16,6 @@ export const routes: Routes = [
   { path :'login',component: LoginComponent},
   { path :'detail',component: DetailProductComponent},
   { path :'detail/:id', component: DetailProductComponent},
-  { path :'login',component: LoginComponent},
   { path :'admin', loadChildren: () => import('./pages/admin-page/admin.module').then(m => m.AdminModule)},
   { path :'register',component: RegisterComponent},
 

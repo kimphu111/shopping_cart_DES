@@ -105,6 +105,13 @@ export class DetailProductComponent implements OnInit {
   // Xử lý khi nhấn "Đặt Hàng"
   submitOrder() {
     if (this.order.fullName && this.order.phoneNumber && this.order.address) {
+      console.log('Đặt hàng thành công với thông tin sau:');
+      console.log('Họ tên: ', this.order.fullName);
+      console.log('Số điện thoại: ', this.order.phoneNumber);
+      console.log('Địa chỉ: ', this.order.address);
+
+
+
       this.showPopup = false; // Ẩn popup nhập thông tin
       this.showSuccessPopup = true; // Hiển thị popup thành công
     } else {

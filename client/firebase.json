@@ -1,0 +1,14 @@
+{
+  "emulators": {
+    "dataconnect": {
+      "dataDir": "dataconnect/.dataconnect/pgliteData"
+    }
+  },
+  "dataconnect": {
+    "source": "dataconnect"
+  },
+  "hosting": {
+    "site": "des-shopping-cart-2a400",
+    "public": "public"
+  }
+}
