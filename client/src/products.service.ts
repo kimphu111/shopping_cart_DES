@@ -1,6 +1,6 @@
 // product.service.ts
 import { Injectable } from '@angular/core';
-import {Product, Product2} from '../app/models/product.model';
+import {Product, Product2} from './app/models/product.model';
 
 @Injectable({
   providedIn: 'root'

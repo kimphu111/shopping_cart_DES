@@ -7,15 +7,13 @@
   <!-- Phần giữa với các liên kết điều hướng -->
   <div class="navbar-center">
     <a [routerLink]="['/']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Trang Chủ</a>
+
     <a [routerLink]="['/album1']" routerLinkActive="active">Bán Áo Quần</a>
     <a [routerLink]="['/album2']" routerLinkActive="active">Bán Phụ Kiện</a>
-    <a [routerLink]="['/admin']" routerLinkActive="active" >Admin</a>
+    <!-- <a *ngIf="isAdminLoggedIn" [routerLink]="['/admin']" routerLinkActive="active">Admin</a> -->
   </div>
 
-
-
   <div class="navbar-right">
-
     <!-- Nút kính lúp -->
     <button mat-icon-button class="search-btn" (click)="toggleSearchBar()">
       <mat-icon>search</mat-icon>
@@ -37,7 +35,7 @@
       </button>
     </div>
 
-    <a class="profile-btn" routerLink="/login" routerLinkActive="active"><mat-icon>person</mat-icon></a>
+    <a class="profile-btn" [routerLink]="['/login']" routerLinkActive="active"><mat-icon>person</mat-icon></a>
   </div>
 
 </nav>

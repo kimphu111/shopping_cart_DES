@@ -1,12 +1,27 @@
+import { enableProdMode } from '@angular/core';
+import { environment } from './enviroments/enviroment';
 import { bootstrapApplication } from '@angular/platform-browser';
-import { appConfig } from './app/app.config'; // Đảm bảo file này đã được định nghĩa đúng
 import { AppComponent } from './app/app.component';
-import { AppRoutesModule } from './app/app.routes'; // Đảm bảo file này đã được định nghĩa đúng
+import { provideRouter } from '@angular/router';
+import { routes } from './app/app.routes';
 import { importProvidersFrom } from '@angular/core';
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { firebaseConfig } from './firebase-config';
+import {FirebaseTSApp} from 'firebasets/firebasetsApp/firebaseTSApp';
+
+if (environment.production) {
+  enableProdMode();
+}
+
+FirebaseTSApp.init(environment.firebaseConfig)
 
 bootstrapApplication(AppComponent, {
   providers: [
-    importProvidersFrom(AppRoutesModule), provideAnimationsAsync(), provideAnimationsAsync() // Nhập providers từ AppRoutesModule nếu cần
+    provideRouter(routes),
+    importProvidersFrom(
+      AngularFireModule.initializeApp(firebaseConfig),
+      AngularFirestoreModule
+    )
   ]
-}).catch((err) => console.error(err));
+}).catch(err => console.error(err));
