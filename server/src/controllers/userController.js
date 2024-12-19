@@ -134,7 +134,7 @@ const login = asyncHandler(async (req, res) => {
             maxAge: 30 * 24 * 60 * 60 * 1000,
             httpOnly: true,
             secure: true, //     true khi có https
-            sameSite: "none",// none khi có https 
+            sameSite: "none",// none khi có https
             path: "/"
         });
         res.status(200).json({
@@ -204,7 +204,7 @@ const Current = (req, res) => {
 
 
 //@desc Refresh User
-//@route POST /api/users/Current
+//@route GET /api/users/refresh
 //@access private
 const refresh = asyncHandler(async (req, res) => {
     try {

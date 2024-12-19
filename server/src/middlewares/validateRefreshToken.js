@@ -6,6 +6,7 @@ const RefreshModel = require('../models/refreshModel');
 const validateRefreshToken = asyncHandler(async (req, res, next) => {
 
     const cookie = req.cookies.refreshToken;
+    console.log("Cookie:", cookie);
     let checkRefreshToken = false;
     const ipAddress = req.ip || req.headers['x-forwarded-for'] || req.connection.remoteAddress;
     let decodedData;

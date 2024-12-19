@@ -22,7 +22,7 @@ require('express-async-handler')
 
 // // init middlewares
 app.use(cors({
-    origin: ['http://localhost:5500', 'http://127.0.0.1:5500'],
+    origin: ['http://localhost:5500', 'http://127.0.0.1:5500','http://localhost:4200'],
     credentials: true,  // Cho phép gửi và nhận cookie
 }));
 app.use(bodyParser.json());

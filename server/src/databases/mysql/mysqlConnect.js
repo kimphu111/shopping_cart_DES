@@ -1,4 +1,4 @@
-// const mysql = require('mysql');
+const mysql = require('mysql');
 const { Sequelize, Datatypes } = require('sequelize');
 const { mysqlConfig } = require('../../configs/mysqlConfig');
 const BlacklistUser = require('../../models/blacklistUser');
