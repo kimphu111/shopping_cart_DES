@@ -1,6 +1,18 @@
+<link rel="stylesheet" href="album-2.component.scss">
 <div class="container-album2">
-
   <div class="top-album2">
+
+    <div class="carousel-album2">
+      <carousel [interval]="3000" [showIndicators]="true" [isAnimated]="true">
+        <slide *ngFor="let slide of slides">
+          <img [src]="slide.src" [alt]="slide.title" class="d-block w-3">
+          <div class="carousel-caption">
+            <h5>{{ slide.title }}</h5>
+          </div>
+        </slide>
+      </carousel>
+    </div>
+
     <h5><a href=""><mat-icon>home</mat-icon></a> Album Bán phụ kiện</h5>
     <p>Danh sách sản phẩm phụ kiện.</p>
   </div>
