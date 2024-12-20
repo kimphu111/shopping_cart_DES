@@ -3,6 +3,9 @@ import { Router } from '@angular/router';
 import {FormsModule} from '@angular/forms';
 import { AccountService } from '../../services/account.service';
 import CryptoJS from 'crypto-js';
+import { UserService } from '../../../service/user/user.service';
+import { User } from '../../models/user.model';
+
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -15,19 +18,26 @@ import CryptoJS from 'crypto-js';
 export class LoginComponent {
   username: string = '';
   password: string = '';
+  users: User[] = [];
 
-  constructor(private router: Router) {}
+  constructor(private router: Router,
+              private userService: UserService,
+  ) { this.userService.getUsers().subscribe(users => {
+    this.users = users;
+    // console.log('Fetched users:', this.users); // Debugging statement
+  });}
+
+
+
   onLogin() {
-    // Danh sách tài khoản giả lập
-    const userAccounts = [
-      { username: 'admin', password: '1234', role: 'admin' },
-      { username: 'user', password: '1234', role: 'user' }
-    ];
 
     // Kiểm tra tài khoản đăng nhập
-    const account = userAccounts.find(
-      acc => acc.username === this.username && acc.password === this.password
-    );
+
+    // console.log('Attempting login with:', this.username, this.password);
+    // console.log('Available users:', this.users);
+    const account = this.users.find(user => {
+      return user.userName === this.username && user.password === this.password;
+    });
 
     if (account) {
       console.log('Login successful!', account);

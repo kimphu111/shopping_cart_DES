@@ -10,6 +10,8 @@ import { MatIconButton } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
 import { FirebaseTSFirestore } from 'firebasets/firebasetsFirestore/firebaseTSFirestore';
 import {FirestoreService} from './services/firestore.service';
+import { User } from './models/user.model';
+import { UserService } from '../service/user/user.service';
 
 
 @Component({
@@ -26,7 +28,10 @@ export class AppComponent implements OnInit {
   isSearchPopupVisible: any;
   searchQuery = '';
 
+  isAdmin: boolean = false;
+
   constructor(
+    private userService: UserService,
     private route: Router,
     private firestoreService: FirestoreService,
     // private productService: ProductService,
@@ -77,9 +82,15 @@ export class AppComponent implements OnInit {
         }
       }).then(r => console.log(r));
     }
-
+    this.CheckUser();
   }
+  CheckUser(): void {
+    this.userService.getUsers().subscribe(users => {
+      const adminUser = users.find(user => user.role === 'Admin');
+      this.isAdmin = !!adminUser;
+    });
   }
+}
 
 
 

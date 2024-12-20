@@ -31,6 +31,7 @@ import {AngularFireModule} from '@angular/fire/compat';
     AngularFirestoreModule,
     Album1_Component,
     Album2_Component,
+    
   ],
   providers: [],
   bootstrap: [],
