@@ -36,7 +36,7 @@
 
     <!-- hien thi ten dang nhap nguoi dung khi da dang nhap -->
     <div *ngIf="username; else loginButton" class="userInfo">
-        <span class="username">Xin chao, {{this.username}}</span>
+        <span class="username" style="color:#ff20b3 ">Xin Chào, {{this.username}}</span>
       <button mat-icon-button (click)="logout()">
         <mat-icon>logout</mat-icon>
       </button>

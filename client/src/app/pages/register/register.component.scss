@@ -60,7 +60,7 @@ input:hover{
   background-color: #d1d1d1;
 }
 
-#login-btn{
+#res-btn{
   width: 100%;
   height: 50px;
   background-image: linear-gradient(45deg,#A68ED2, #F274E1);
@@ -98,5 +98,10 @@ input:hover{
     font-size: 20px;
     font-weight: 420;
   }
+}
+
+.errorrMessage{
+  color: red;
+  font-size: 20px;
 }
 

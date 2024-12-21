@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import {FormsModule} from '@angular/forms';
-import { AccountService } from '../../services/account.service';
-import CryptoJS from 'crypto-js';
 import axios,{RawAxiosRequestHeaders } from 'axios';
 
 @Component({

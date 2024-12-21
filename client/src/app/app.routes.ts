@@ -6,7 +6,8 @@ import {NgModule} from '@angular/core';
 import {LoginComponent} from './pages/login/login.component';
 import {DetailProductComponent} from './pages/detail-product/detail-product.component';
 import {RegisterComponent} from './pages/register/register.component';
-// import {AdminModule} from './pages/admin-page/admin.module';
+import {AdminGuard} from './admin.guard';
+import {AdminBillingComponent} from './pages/admin-page/admin-billing/admin-billing.component';
 
 
 export const routes: Routes = [
@@ -16,11 +17,14 @@ export const routes: Routes = [
   { path :'login',component: LoginComponent},
   { path :'detail',component: DetailProductComponent},
   { path :'detail/:id', component: DetailProductComponent},
-  { path :'admin', loadChildren: () => import('./pages/admin-page/admin.module').then(m => m.AdminModule)},
   { path :'register',component: RegisterComponent},
 
+  { path :'admin', loadChildren: () => import('./pages/admin-page/admin.module').then(m => m.AdminModule)},
+  { path: 'billing', component: AdminBillingComponent, canActivate: [AdminGuard] },
+  { path: 'user', component: AdminBillingComponent, canActivate: [AdminGuard] },
 
-  { path : '**', redirectTo: '' } // quay ve khi k tim thay trang
+
+  { path : '**', redirectTo: '',pathMatch:'full' } // quay ve khi k tim thay trang
 
 ];
 

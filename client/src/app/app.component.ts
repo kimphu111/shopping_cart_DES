@@ -13,12 +13,13 @@ import {FirestoreService} from './services/firestore.service';
 import axios, {RawAxiosRequestHeaders} from 'axios';
 import {logEvent} from '@angular/fire/analytics';
 import {LoginComponent} from './pages/login/login.component';
+import {RegisterComponent} from './pages/register/register.component';
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HomeComponent, RouterLink, MatIcon, RouterLinkActive, NgIf, MatIconButton, FormsModule,LoginComponent],
+  imports: [RouterOutlet, HomeComponent, RouterLink, MatIcon, RouterLinkActive, NgIf, MatIconButton, FormsModule,LoginComponent,RegisterComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
   providers: [FirebaseTSFirestore] // Provide FirebaseTSFirestore here
@@ -53,6 +54,13 @@ export class AppComponent implements OnInit {
     if (isPlatformBrowser(this.platformId)) {
       const accessToken = localStorage.getItem('accessToken');
 
+      const currentUrl = this.route.url
+      const publicRoutes = [ '/forgot-password', '/album1','/album2', '/home','/register'];
+
+      if (publicRoutes.some(route => currentUrl.startsWith(route))) {
+        return;
+      }
+
       if (accessToken) {
         axios.get('http://localhost:8000/api/users/current', {
           headers: {
@@ -63,10 +71,8 @@ export class AppComponent implements OnInit {
         })
           .then((res) => {
             const { username, email } = res.data;
-            this.username = username;
-            this.email = email;
-            localStorage.setItem('username', username);
-            localStorage.setItem('email', email);
+            localStorage.setItem('email', email);  // Lưu email
+            localStorage.setItem('username', username);  // Lưu username
             alert('Chào mừng bạn đã quay trở lại');
           })
           .catch(() => {
@@ -79,6 +85,10 @@ export class AppComponent implements OnInit {
       }
     }
   }
+
+
+
+
 
 
   searchProducts(query: string) {
@@ -94,8 +104,7 @@ export class AppComponent implements OnInit {
     if (isPlatformBrowser(this.platformId)) {
       this.username = localStorage.getItem('username');
       console.log('Username from localStorage:', this.username);
-      this.email = localStorage.getItem('email');
-      console.log('Username:', this.username);
+
     }
 
     this.route.events.subscribe((event) => {
