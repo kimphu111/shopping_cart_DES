@@ -1,7 +1,7 @@
 const mysqlConfig = {
     DB: "example",
-    USER: "Thanh",
-    PASSWORD: "2Y5IQ2IC",
+    USER: "root",
+    PASSWORD: "123456",
     HOST: "localhost",
     DIALECT: "mysql",
     POOL: {

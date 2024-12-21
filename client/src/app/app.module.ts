@@ -12,6 +12,7 @@ import { AdminComponent } from './pages/admin-page/admin.component';
 import { AngularFirestoreModule} from '@angular/fire/compat/firestore';
 import {environment} from '../enviroments/enviroment';
 import {AngularFireModule} from '@angular/fire/compat';
+import {HttpClientModule} from '@angular/common/http';
 
 
 @NgModule({
@@ -31,7 +32,7 @@ import {AngularFireModule} from '@angular/fire/compat';
     AngularFirestoreModule,
     Album1_Component,
     Album2_Component,
-    
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [],

@@ -12,12 +12,15 @@ import { FirebaseTSFirestore } from 'firebasets/firebasetsFirestore/firebaseTSFi
 import {FirestoreService} from './services/firestore.service';
 import { User } from './models/user.model';
 import { UserService } from '../service/user/user.service';
+import axios, {RawAxiosRequestHeaders} from 'axios';
+import {logEvent} from '@angular/fire/analytics';
+import {LoginComponent} from './pages/login/login.component';
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HomeComponent, RouterLink, MatIcon, RouterLinkActive, NgIf, MatIconButton, FormsModule],
+  imports: [RouterOutlet, HomeComponent, RouterLink, MatIcon, RouterLinkActive, NgIf, MatIconButton, FormsModule,LoginComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
   providers: [FirebaseTSFirestore] // Provide FirebaseTSFirestore here
@@ -27,6 +30,9 @@ export class AppComponent implements OnInit {
   title = 'client';
   isSearchPopupVisible: any;
   searchQuery = '';
+  username: string | null = null;
+  email: string | null = null;
+  password: string | null = null;
 
   isAdmin: boolean = false;
 
@@ -34,10 +40,10 @@ export class AppComponent implements OnInit {
     private userService: UserService,
     private route: Router,
     private firestoreService: FirestoreService,
-    // private productService: ProductService,
     @Inject(PLATFORM_ID) private platformId: Object,
   ) {
     this.firestore = new FirebaseTSFirestore();
+    this.onCurrent();
   }
 
   toggleSearchBar() {
@@ -47,6 +53,38 @@ export class AppComponent implements OnInit {
   closeSearchPopup() {
     this.isSearchPopupVisible = false;
   }
+
+  onCurrent() {
+    if (isPlatformBrowser(this.platformId)) {
+      const accessToken = localStorage.getItem('accessToken');
+
+      if (accessToken) {
+        axios.get('http://localhost:8000/api/users/current', {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + accessToken
+          },
+          withCredentials: true
+        })
+          .then((res) => {
+            const { username, email } = res.data;
+            this.username = username;
+            this.email = email;
+            localStorage.setItem('username', username);
+            localStorage.setItem('email', email);
+            alert('Chào mừng bạn đã quay trở lại');
+          })
+          .catch(() => {
+            this.route.navigate(['/login']);
+            alert('Phiên làm việc đã hết hạn');
+          });
+      } else {
+        this.route.navigate(['/login']);
+        alert('Vui lòng đăng nhập để tiếp tục');
+      }
+    }
+  }
+
 
   searchProducts(query: string) {
     if (!query.trim()) {
@@ -58,9 +96,12 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.firestoreService.setProductDocument('1', { name: 'product1', price: 100 });
-
-
+    if (isPlatformBrowser(this.platformId)) {
+      this.username = localStorage.getItem('username');
+      console.log('Username from localStorage:', this.username);
+      this.email = localStorage.getItem('email');
+      console.log('Username:', this.username);
+    }
 
     this.route.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
@@ -70,17 +111,17 @@ export class AppComponent implements OnInit {
       }
     });
 
-
     if (isPlatformBrowser(this.platformId)) {
       this.firestore.getDocument({
         path: ['products', '1'],
         onComplete: (result) => {
-          console.log('Document data:', result.data());
+          // console.log('Document data:', result.data());
         },
         onFail: (error) => {
           console.error('Error fetching document:', error);
         }
-      }).then(r => console.log(r));
+      })
+        // .then(r => console.log(r));
     }
     this.CheckUser();
   }
@@ -88,9 +129,41 @@ export class AppComponent implements OnInit {
     this.userService.getUsers().subscribe(users => {
       const adminUser = users.find(user => user.role === 'Admin');
       this.isAdmin = !!adminUser;
-    });
+    });}
+  logout() {
+    // Xóa accessToken và username khỏi localStorage
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('username');
+    localStorage.removeItem('email');
+
+    // Xóa bất kỳ cookie nào có liên quan đến phiên làm việc (nếu có)
+    // Xóa cookie accessToken
+    document.cookie = 'accessToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=' + window.location.hostname;
+
+    // Cũng có thể cần xóa các cookie khác nếu có, ví dụ:
+    document.cookie = 'otherCookie=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=' + window.location.hostname;
+
+    // Xóa sessionStorage nếu có
+    sessionStorage.removeItem('accessToken');
+    sessionStorage.removeItem('username');
+
+    // Đặt lại các giá trị trong component
+    this.username = null;
+    this.email = null;
+
+    // Cảnh báo hoặc thông báo người dùng
+    alert('Bạn đã đăng xuất');
+
+    // Điều hướng người dùng đến trang đăng nhập
+    this.route.navigate(['/login']);
   }
+
+
+  
 }
+
+
+
 
 
 

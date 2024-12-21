@@ -10,7 +10,7 @@
 
     <a [routerLink]="['/album1']" routerLinkActive="active">Bán Áo Quần</a>
     <a [routerLink]="['/album2']" routerLinkActive="active">Bán Phụ Kiện</a>
-    <!-- <a *ngIf="isAdminLoggedIn" [routerLink]="['/admin']" routerLinkActive="active">Admin</a> -->
+    <a *ngIf="isAdmin" [routerLink]="['/admin']" routerLinkActive="active">Admin</a>
   </div>
 
   <div class="navbar-right">
