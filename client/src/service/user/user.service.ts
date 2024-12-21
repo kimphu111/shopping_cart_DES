@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { User } from '../../app/models/user.model';
-import { Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -15,6 +15,9 @@ export class UserService {
     // Add more users as needed
   ];
 
+  private userSource = new BehaviorSubject<User[]>([]);
+  currentUser = this.userSource.asObservable();
+
   constructor() { }
 
   getUsers(): Observable<User[]> {
@@ -22,6 +25,9 @@ export class UserService {
   }
   getUserById(id: number): Observable<User | undefined> {
     return of(this.users.find(user => user.id === id));
+  }
+  getUserBilling(){
+    return this.userSource.value;
   }
   
 }

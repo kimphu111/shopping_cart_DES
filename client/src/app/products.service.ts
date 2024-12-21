@@ -1,6 +1,7 @@
 // product.service.ts
 import { Injectable } from '@angular/core';
 import {Product, Product2} from './models/product.model';
+import { BehaviorSubject } from 'rxjs';
 
 
 @Injectable({
@@ -58,6 +59,16 @@ export class ProductService {
 
   private selectedProduct: Product | null = null;
   private selectedProduct2: Product2 | null = null;
+
+  private productSource = new BehaviorSubject<Product | null>(null);
+  currentProduct = this.productSource.asObservable();
+
+  constructor() { }
+  
+
+  changeProduct(product: Product) {
+    this.productSource.next(product);
+  } 
 
   setSelectedProduct(product: Product) {
     this.selectedProduct = product;

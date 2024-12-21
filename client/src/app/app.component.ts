@@ -58,6 +58,13 @@ export class AppComponent implements OnInit {
     if (isPlatformBrowser(this.platformId)) {
       const accessToken = localStorage.getItem('accessToken');
 
+      const currentUrl = this.route.url
+      const publicRoutes =  [ '/forgot-password', '/album1','/album2', '/home','/register', '/detail-product'];
+
+      if (publicRoutes.includes(currentUrl)) {
+        return;
+      }
+
       if (accessToken) {
         axios.get('http://localhost:8000/api/users/current', {
           headers: {
