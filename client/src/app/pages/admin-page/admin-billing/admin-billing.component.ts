@@ -50,7 +50,7 @@ export class AdminBillingComponent {
       address: product.address,
       date: new Date().toISOString()
     };
-    this.billing.push(newBilling);
+    this.billing.unshift(newBilling);
   }
 
   deleteBilling(id: number){
