@@ -12,8 +12,11 @@
           <input type="password" name="password" [(ngModel)]="password" placeholder="Enter Password" required>
 
           <div id="middle">
-            <button mat-flat-button id="login-btn" (click)="onLogin()" type="button">
-              Sign in
+            <button mat-flat-button id="login-btn" [disabled]="isLoading" (click)="onLogin()">
+              <ng-container *ngIf="!isLoading">Sign in</ng-container>
+              <ng-container *ngIf="isLoading">
+                <i class="fas fa-spinner fa-spin"></i> Loading...
+              </ng-container>
             </button>
           </div>
 
@@ -22,8 +25,12 @@
             <p>Don't have an account ? <p>
             <a href="/register">Create Account</a>
           </div>
-
         </form>
+
+      <div id="loading-spinner" *ngIf="isLoading">
+        <div class="spinner"></div>
+      </div>
+
         </div>
 
 </div>

@@ -75,7 +75,6 @@ export class ProductService {
 
   setSelectedProduct2(product: Product2) {
     this.selectedProduct2 = product;
-    // Lưu vào localStorage
     localStorage.setItem('selectedProduct2', JSON.stringify(product));
   }
 

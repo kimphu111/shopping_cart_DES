@@ -28,7 +28,7 @@ const validateAcessToken = asyncHandler(async (req, res, next) => {
             req.user = decodedData.user;
 
             next();
-        };
+        }
     } else {
         res.status(400);
         throw new Error("access token not found")

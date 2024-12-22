@@ -1,14 +1,16 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import {FormsModule} from '@angular/forms';
-import axios,{RawAxiosRequestHeaders } from 'axios';
+import { FormsModule } from '@angular/forms';
+import axios, { RawAxiosRequestHeaders } from 'axios';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-login',
   standalone: true,
   templateUrl: './login.component.html',
   imports: [
-    FormsModule
+    FormsModule,
+    NgIf
   ],
   styleUrl: './login.component.scss'
 })
@@ -16,49 +18,67 @@ export class LoginComponent {
   username: string = '';
   email: string = '';
   password: string = '';
+  isLoading: boolean = false;
 
   constructor(private router: Router) {}
 
-
   onLogin() {
-    console.log('Email:', this.email); // Kiểm tra xem email có giá trị không
-    console.log('Password:', this.password); // Kiểm tra xem password có giá trị không
-    const payloadOption : any = {
+    console.log('Email:', this.email);
+    console.log('Password:', this.password);
+    const payloadOption: any = {
       email: this.email,
       password: this.password
+    };
+    this.isLoading = true;
 
-    }
-    axios.post('http://localhost:8000/api/users/login',payloadOption,{
-      headers: {
-        'Content-Type': 'application/json',
-        'application': 'application/json',
-      } as RawAxiosRequestHeaders
-      ,withCredentials: true
-    })
-      .then((res) => res.data)
-      .then((data) => {
-        alert("Đăng nhập thành công");
-        console.log(data);
-        localStorage.setItem('accessToken', data.accessToken); // Lưu token vào localStorage
-        localStorage.setItem('username', data.username); // Lưu username vào localStorage
-        this.router.navigate(['/']); // Điều hướng về trang chủ
+    setTimeout(() => {
+
+      axios.post('http://localhost:8000/api/users/login', payloadOption, {
+        headers: {
+          'Content-Type': 'application/json',
+          'application': 'application/json',
+        } as RawAxiosRequestHeaders,
+        withCredentials: true
       })
-      .catch(() => alert("Đăng nhập thất bại"));
+        .then((res) => res.data)
+        .then((data) => {
+          this.isLoading = false;
+          console.log(data);
+
+          localStorage.setItem('accessToken', data.accessToken);
+
+          const decodedToken = this.decodeJwt(data.accessToken);
+          if (decodedToken) {
+            this.username = decodedToken.user?.username;
+            localStorage.setItem('username', this.username);
+          }
+
+          this.router.navigate(['/']);
+        })
+        .catch((error) => {
+          this.isLoading = false;
+          console.error(error);
+          alert("Đăng nhập thất bại");
+
+          window.location.reload();
+        });
+    }, 3500);
   }
 
+  decodeJwt(token: string) {
+    try {
+      const parts = token.split('.');
+      if (parts.length !== 3) {
+        throw new Error('Invalid token format');
+      }
 
-//   generateToken(): string {
-//     const randomString = Math.random().toString(36).substring(2, 15); // Chuỗi ngẫu nhiên
-//     const token = CryptoJS.MD5(randomString).toString(); // Mã hóa bằng MD5 (hoặc các thuật toán khác như SHA256)
-//     return token;
-//   }
-//
-// // Hàm logout để xóa token và điều hướng lại trang login
-//   logout() {
-//     localStorage.removeItem('access_token');
-//     localStorage.removeItem('role');
-//     alert('Session expired. Please log in again.');
-//     this.router.navigate(['/login']);
-//   }
+      const payload = parts[1]; // Phần payload ở vị trí thứ 1
+      const decodedPayload = atob(payload); // Giải mã base64
 
+      return JSON.parse(decodedPayload); // Trả về đối tượng JSON
+    } catch (error) {
+      console.error('Error decoding token:', error);
+      return null;
+    }
+  }
 }

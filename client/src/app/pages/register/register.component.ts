@@ -1,27 +1,22 @@
 import { Component } from '@angular/core';
-import axios,{RawAxiosRequestHeaders } from 'axios';
-import {FormsModule} from '@angular/forms';
-import { Router} from '@angular/router';
-import {NgIf} from '@angular/common';
-import {LoginComponent} from '../login/login.component';
-import {AppComponent} from '../../app.component';
+import axios from 'axios';
+import { Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-register',
   standalone: true,
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],
-  imports: [
-    FormsModule,
-    NgIf
-  ]
+  imports: [FormsModule, NgIf],
 })
 export class RegisterComponent {
   username: string = '';
   email: string = '';
   password: string = '';
-
   errorMessage: string | null = null;
+  isLoading: boolean = false;
 
   // Các lỗi hiển thị
   usernameError: string | null = null;
@@ -50,7 +45,7 @@ export class RegisterComponent {
   // Kiểm tra Email
   checkEmail() {
     this.showEmailError = true;
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Regex kiểm tra định dạng email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!this.email) {
       this.emailError = 'Email is required.';
     } else if (!emailRegex.test(this.email)) {
@@ -65,7 +60,7 @@ export class RegisterComponent {
     this.showPasswordError = true;
     if (!this.password) {
       this.passwordError = 'Password is required.';
-    } else if (this.password.length <= 8) {
+    } else if (this.password.length <= 4) {
       this.passwordError = 'Password must be at least 6 characters.';
     } else {
       this.passwordError = null;
@@ -74,14 +69,31 @@ export class RegisterComponent {
 
   onRegister() {
     this.errorMessage = null; // Reset thông báo lỗi trước khi gửi yêu cầu
-    console.log('Username:', this.username);
-    console.log('Email:', this.email);
-    console.log('Password:', this.password);
-
     if (!this.username || !this.email || !this.password) {
       this.errorMessage = 'Vui lòng điền đầy đủ thông tin.';
       return;
     }
+
+    // Kiểm tra trùng tên đăng nhập hoặc email từ danh sách giả định (trong trường hợp thực tế, bạn có thể gọi API kiểm tra)
+    const existingUsers = [
+      { username: 'existingUser', email: 'existing@email.com' }, // Danh sách người dùng đã tồn tại (giả sử)
+    ];
+
+    // Kiểm tra nếu username hoặc email đã tồn tại trong danh sách
+    const usernameExists = existingUsers.some(user => user.username === this.username);
+    const emailExists = existingUsers.some(user => user.email === this.email);
+
+    if (usernameExists) {
+      this.errorMessage = 'Tên đăng nhập đã tồn tại. Vui lòng chọn tên khác.';
+      return;  // Dừng việc gửi request và hiển thị lỗi
+    }
+
+    if (emailExists) {
+      this.errorMessage = 'Email đã tồn tại. Vui lòng chọn email khác.';
+      return;  // Dừng việc gửi request và hiển thị lỗi
+    }
+
+    this.isLoading = true; // Bật spinner khi bắt đầu gửi request
 
     const payloadOption: any = {
       username: this.username,
@@ -89,38 +101,28 @@ export class RegisterComponent {
       password: this.password,
     };
 
+    // Thực hiện yêu cầu đăng ký
     axios
       .post('http://localhost:8000/api/users/register', payloadOption, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         withCredentials: true,
       })
       .then((res) => {
-        alert('Đăng ký thành công,Vui lòng đăng nhập lại');
-        console.log(res.data);
+        alert('Đăng ký thành công, vui lòng đăng nhập lại');
         this.router.navigate(['/']);
-      })
-      .catch((err) => {
-        console.error('Lỗi từ backend:', err.response?.data);
+      }).catch((err) => {
+      console.error('Lỗi từ backend:', err.response?.data);
 
-        if (err.response && err.response.data && err.response.data.sqlMessage) {
-          const sqlMessage = err.response.data.sqlMessage;
-
-          if (sqlMessage.includes("for key 'users.username'")) {
-            this.errorMessage = 'Tên đăng nhập đã tồn tại. Vui lòng chọn tên khác.';
-          } else if (sqlMessage.includes("for key 'users.email'")) {
-            this.errorMessage = 'Email đã tồn tại. Vui lòng chọn email khác.';
-          } else {
-            this.errorMessage = 'Đăng ký thất bại. Vui lòng thử lại.';
-          }
+      setTimeout(() => {
+        if (err.response && err.response.data && err.response.data.error) {
+          this.errorMessage = err.response.data.error; // Lỗi từ backend (trùng username/email)
         } else {
-          console.error('Lỗi không xác định:', err);
-          this.errorMessage = 'Có lỗi xảy ra. Vui lòng thử lại sau.';
+          this.errorMessage = 'Đăng ký thất bại. Vui lòng thử lại.';
         }
+      }, 5000); // 5 giây delay
+    })
+      .finally(() => {
+        this.isLoading = false; // Tắt spinner sau khi có kết quả
       });
   }
-
-
 }
-

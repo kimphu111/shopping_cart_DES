@@ -1,7 +1,7 @@
 <div id="container-res">
   <div id="res">
     <h1 class="gradient-text">Create your account</h1>
-    <form id="res-form">
+    <form id="res-form" (ngSubmit)="onRegister()">
       <!-- Username -->
       <p>Username<span style="color: red">*</span></p>
       <input
@@ -57,7 +57,7 @@
 
       <!-- Submit Button -->
       <div id="middle">
-        <button mat-flat-button id="res-btn" (click)="onRegister()" type="button">
+        <button mat-flat-button id="res-btn" type="submit" [disabled]="isLoading">
           Sign up
         </button>
       </div>
@@ -76,5 +76,10 @@
         <a href="/login">Log in</a>
       </div>
     </form>
+  </div>
+
+  <!-- Spinner (loading) -->
+  <div id="loading-spinner" *ngIf="isLoading">
+    <div class="spinner"></div>
   </div>
 </div>
