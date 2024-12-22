@@ -4,7 +4,6 @@ import { AccountService } from '../../services/account.service';
 import CryptoJS from 'crypto-js';
 import { UserService } from '../../../service/user/user.service';
 import { User } from '../../models/user.model';
-import axios,{RawAxiosRequestHeaders } from 'axios';
 import { FormsModule } from '@angular/forms';
 import axios, { RawAxiosRequestHeaders } from 'axios';
 import { NgIf } from '@angular/common';

@@ -4,7 +4,6 @@ import { isPlatformBrowser } from '@angular/common';
 import { HomeComponent } from './pages/home/home.component';
 import { MatIcon } from '@angular/material/icon';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
-// import { ProductService } from './products.service';
 import { NgIf } from '@angular/common';
 import { MatIconButton } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
@@ -35,6 +34,7 @@ export class AppComponent implements OnInit {
   email: string | null = null;
   password: string | null = null;
 
+
   isAdmin: boolean = false;
 
   constructor(
@@ -56,22 +56,14 @@ export class AppComponent implements OnInit {
   }
 
   onCurrent() {
+
     if (isPlatformBrowser(this.platformId)) {
       const accessToken = localStorage.getItem('accessToken');
       const currentUrl = this.route.url
-
-      const publicRoutes = ['/forgot-password', '', '/album2', '/home', '/'];
+      const publicRoutes =  [ '/forgot-password', '/album1','/album2', '/home','/register', '/detail-product'];
 
       // Nếu đang ở một trong những route công khai, bỏ qua kiểm tra đăng nhập
       if (publicRoutes.some(route => currentUrl.startsWith(route))) {
-        return;
-      }
-
-
-      const currentUrl = this.route.url
-      const publicRoutes =  [ '/forgot-password', '/album1','/album2', '/home','/register', '/detail-product'];
-
-      if (publicRoutes.includes(currentUrl)) {
         return;
       }
 
@@ -158,7 +150,6 @@ export class AppComponent implements OnInit {
 
     document.cookie = 'accessToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=' + window.location.hostname;
 
-    document.cookie = 'otherCookie=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=' + window.location.hostname;
 
     sessionStorage.removeItem('accessToken');
     sessionStorage.removeItem('username');
@@ -172,7 +163,7 @@ export class AppComponent implements OnInit {
   }
 
 
-  
+
 }
 
 
