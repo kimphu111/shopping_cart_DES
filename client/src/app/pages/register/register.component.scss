@@ -60,7 +60,7 @@ input:hover{
   background-color: #d1d1d1;
 }
 
-#login-btn{
+#res-btn{
   width: 100%;
   height: 50px;
   background-image: linear-gradient(45deg,#A68ED2, #F274E1);
@@ -98,5 +98,36 @@ input:hover{
     font-size: 20px;
     font-weight: 420;
   }
+}
+
+.errorrMessage{
+  color: red;
+  font-size: 20px;
+}
+
+#loading-spinner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.spinner {
+  border: 5px solid rgba(255, 255, 255, 0.3);
+  border-top: 5px solid #3498db;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 

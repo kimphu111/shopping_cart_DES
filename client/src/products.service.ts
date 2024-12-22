@@ -2,8 +2,6 @@
 // import { Injectable } from '@angular/core';
 // import {Product, Product2} from './app/models/product.model';
 
-// @Injectable({
-//   providedIn: 'root'
 // })
 // export class ProductService {
 //   products: Product[] = [
@@ -22,6 +20,9 @@
 
 //   ];
 
+//
+//   ];
+//
 //     product2: Product2[] = [
 //       { id: 1, name: 'Túi xách nữ', quantity: 1,  price: 100000, image: 'https://via.placeholder.com/150' },
 //       { id: 2, name: 'Túi đeo chéo nữ', quantity: 1,  price: 200000, image: 'https://via.placeholder.com/150' },
@@ -53,6 +54,23 @@
 //     return this.selectedProduct2;
 //   }
 
+//
+//       private selectedProduct: Product | null = null;
+//       private selectedProduct2: Product2 | null = null;
+//
+//   setSelectedProduct(product: Product) {
+//     this.selectedProduct = product;
+//   }
+//
+//   getSelectedProduct(): Product | null {
+//     return this.selectedProduct;
+//   }
+//
+//
+//   getSelectedProduct2(): Product2 | null {
+//     return this.selectedProduct2;
+//   }
+//
 //   setSelectedProduct2(product2: Product2) {
 //     this.selectedProduct2 = product2;
 //   }

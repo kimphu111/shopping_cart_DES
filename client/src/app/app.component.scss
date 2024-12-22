@@ -13,20 +13,20 @@ body, html {
   text-align: center;
   background-color: #343A40;
   height: 120px;
-  width: 100%; /* Đảm bảo navbar luôn chiếm toàn bộ chiều rộng màn hình */
+  width: 100%;
   position: fixed;
   top: 0;
   left: 0;
   z-index: 1000;
-  padding: 0 20px; /* Thêm khoảng cách hai bên để tránh các phần tử bị dính vào mép màn hình */
-  box-sizing: border-box; /* Đảm bảo padding không làm thay đổi kích thước */
+  padding: 0 80px;
+  box-sizing: border-box;
 }
 
 
 .navbar-left, .navbar-center, .navbar-right {
   display: flex;
   align-items: center;
-  justify-content: center;  /* Căn giữa các phần tử trong từng vùng */
+  justify-content: center;
   img {
     width: 200px;
     height: 130px;
@@ -34,10 +34,28 @@ body, html {
 
 }
 
+.navbar-left {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
 .navbar-center {
+  flex: 2;
+  display: flex;
   justify-content: center;
   gap: 20px;
+  padding: 0 220px 0 300px;
 }
+
+.navbar-right {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+
 
 .navbar-center a {
   text-decoration: none;
@@ -51,10 +69,7 @@ body, html {
   color: #ff00af;
 }
 
-.navbar-right {
-  gap: 20px;
-  padding-left: 90px;
-}
+
 
 .search-btn {
   background-color: transparent;
@@ -62,6 +77,7 @@ body, html {
   cursor: pointer;
   font-size: 20px;
   color: white;
+  transition: 0.3s;
 }
 
 .overlay {
@@ -208,4 +224,11 @@ body, html {
   gap: 10px;
   font-size: 20px;
   color: white;
+}
+
+@media screen {
+  .navbar {
+    padding-left: 30px;
+  }
+
 }

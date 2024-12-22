@@ -11,7 +11,11 @@ import { Admin_Routes } from './admin.routes';
   ],
   imports: [
     CommonModule,
-    Admin_Routes
+    Admin_Routes,
+    AdminBillingComponent,
+    AdminUserComponent,
+    AdminBillingComponent,
+    AdminComponent
   ]
 })
 export class AdminModule { }
