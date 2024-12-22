@@ -1,5 +1,5 @@
 export interface Billing {
-    id: string;
+    id: number;
     productName: string;
     userName: string;
     phone: string;

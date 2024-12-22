@@ -10,6 +10,8 @@ import { MatIconButton } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
 import { FirebaseTSFirestore } from 'firebasets/firebasetsFirestore/firebaseTSFirestore';
 import {FirestoreService} from './services/firestore.service';
+import { User } from './models/user.model';
+import { UserService } from '../service/user/user.service';
 import axios, {RawAxiosRequestHeaders} from 'axios';
 import {logEvent} from '@angular/fire/analytics';
 import {LoginComponent} from './pages/login/login.component';
@@ -33,7 +35,10 @@ export class AppComponent implements OnInit {
   email: string | null = null;
   password: string | null = null;
 
+  isAdmin: boolean = false;
+
   constructor(
+    private userService: UserService,
     private route: Router,
     private firestoreService: FirestoreService,
     @Inject(PLATFORM_ID) private platformId: Object,
@@ -62,6 +67,13 @@ export class AppComponent implements OnInit {
         return;
       }
 
+
+      const currentUrl = this.route.url
+      const publicRoutes =  [ '/forgot-password', '/album1','/album2', '/home','/register', '/detail-product'];
+
+      if (publicRoutes.includes(currentUrl)) {
+        return;
+      }
 
       if (accessToken) {
         axios.get('http://localhost:8000/api/users/current', {
@@ -110,6 +122,7 @@ export class AppComponent implements OnInit {
         }
       });
     }
+    this.CheckUser();
 
     // this.route.events.subscribe((event) => {
     //   if (event instanceof NavigationEnd) {
@@ -133,6 +146,11 @@ export class AppComponent implements OnInit {
     // }
 
   }
+  CheckUser(): void {
+    this.userService.getUsers().subscribe(users => {
+      const adminUser = users.find(user => user.role === 'Admin');
+      this.isAdmin = !!adminUser;
+    });}
   logout() {
     localStorage.removeItem('accessToken');
     localStorage.removeItem('username');
@@ -154,7 +172,8 @@ export class AppComponent implements OnInit {
   }
 
 
-  }
+  
+}
 
 
 

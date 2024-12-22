@@ -4,16 +4,16 @@
         <table class="user-table">
             <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>Phone</th>
-                    <th>Adress</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Password</th>
                     <th>Status</th>
                 </tr>
-                <tr class="user-data">
-                    <td class="user-info">John Doe</td>
-                    <td class="user-info">123456789</td>
-                    <td class="user-info">1234 Main St</td>
-                    <td class="user-info action-btn">Unblock</td>
+                <tr class="user-data" *ngFor="let user of users">
+                    <td class="user-info">{{ user.userName }}</td>
+                    <td class="user-info">{{ user.email }}</td>
+                    <td class="user-info">{{ user.password }}</td>
+                    <td class="user-info action-btn">{{user.status}}</td>
                 </tr>
             </thead>
         </table>

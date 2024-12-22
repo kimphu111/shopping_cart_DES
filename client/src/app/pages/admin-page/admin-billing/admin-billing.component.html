@@ -1,18 +1,17 @@
 <div id="container">
     <h3>Billing information</h3>
     <div id="table-container">
-        <div class="wrapper">
-
+        <div class="wrapper" *ngFor="let bill of billing">
             <div class="header">
-                <h5>Product_name</h5>
-                <button class="btn">Delete</button>
+                <h5>{{ bill.productName }}</h5>
+                <button class="btn" (click)="deleteBilling(bill.id)" >Delete</button>
             </div>
             
             <div class="billing-info">
-                <p>User_name</p>
-                <p>Phone</p>
-                <p>Address</p>
-                <p>Date</p>
+                <p>User name: {{ bill.userName }}</p>
+                <p>Phone: {{ bill.phone }}</p>
+                <p>Address: {{ bill.address }}</p>
+                <p>Date: {{ bill.date}}</p>
             </div>
         </div>
     </div>

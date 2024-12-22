@@ -103,13 +103,20 @@ export class DetailProductComponent implements OnInit {
   }
 
   // Xử lý khi nhấn "Đặt Hàng"
-  submitOrder() {
+  submitOrder(productItem: Product) {
     if (this.order.fullName && this.order.phoneNumber && this.order.address) {
       console.log('Đặt hàng thành công với thông tin sau:');
       console.log('Họ tên: ', this.order.fullName);
       console.log('Số điện thoại: ', this.order.phoneNumber);
       console.log('Địa chỉ: ', this.order.address);
 
+      const orderDetails = {
+        ...productItem,
+        fullName: this.order.fullName,
+        phoneNumber: this.order.phoneNumber,
+        address: this.order.address
+      };
+      this.productService.changeProduct(orderDetails);
 
 
       this.showPopup = false; // Ẩn popup nhập thông tin
@@ -117,7 +124,6 @@ export class DetailProductComponent implements OnInit {
     } else {
       alert('Vui lòng điền đầy đủ thông tin trước khi đặt hàng!');
     }
-    console.log(this.submitOrder())
   }
 
 }

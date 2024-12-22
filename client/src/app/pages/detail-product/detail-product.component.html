@@ -36,7 +36,7 @@
   <div id="popup" *ngIf="showPopup">
     <div id="popup-content">
       <h2>Thông Tin Đặt Hàng</h2>
-      <form (ngSubmit)="submitOrder()">
+      <form (ngSubmit)="submitOrder(productItem)">
         <div class="form-group">
           <span class="material-symbols-outlined">person</span>
           <input type="text" placeholder="Full Name" [(ngModel)]="order.fullName" name="fullName" required />
@@ -51,7 +51,7 @@
         </div>
         <div class="buttons">
           <button type="button" class="btn cancel" (click)="closePopup()">Quay về</button>
-          <button type="submit" class="btn submit">Đặt Hàng</button>
+          <button type="submit" class="btn submit" >Đặt Hàng</button>
         </div>
       </form>
     </div>
