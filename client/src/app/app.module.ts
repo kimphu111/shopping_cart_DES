@@ -6,7 +6,7 @@ import {Album1_Component} from './pages/album-1/album-1.component';
 import {Album2_Component} from './pages/album-2/album-2.component';
 import {LoginComponent} from './pages/login/login.component';
 import {DetailProductComponent} from './pages/detail-product/detail-product.component';
-import { AdminUserComponent } from './pages/admin-page/admin-user/admin-user.component';
+import { AdminUsersComponent } from './pages/admin-page/admin-user/admin-user.component';
 import { AdminBillingComponent } from './pages/admin-page/admin-billing/admin-billing.component';
 import { AdminComponent } from './pages/admin-page/admin.component';
 import { AngularFirestoreModule} from '@angular/fire/compat/firestore';
@@ -26,7 +26,7 @@ import {HttpClientModule} from '@angular/common/http';
     Album2_Component,
     LoginComponent,
     DetailProductComponent,
-    AdminUserComponent,
+    AdminUsersComponent,
     AdminBillingComponent,
     AdminComponent,
     AngularFirestoreModule,

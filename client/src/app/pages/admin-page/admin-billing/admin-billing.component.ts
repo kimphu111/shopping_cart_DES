@@ -28,20 +28,20 @@ export class AdminBillingComponent {
   ngOnInit(): void {
     this.billingService.getBilling().subscribe(billing => {this.billing = billing});
 
-    
+
     this.productService.currentProduct.subscribe(product => {
       if (product) {
         this.addProductToBilling(product);
       }
     });
 
-    this.userService.currentUser.subscribe(user => {
-      this.userName = user[0];
-    });
-    
+    // this.userService.currentUser.subscribe(user => {
+    //   this.userName = user[0];
+    // });
+
   }
-  
-  addProductToBilling(product: any) { 
+
+  addProductToBilling(product: any) {
     const newBilling: Billing = {
       id: this.billing.length + 1,
       productName: product.name,
@@ -57,7 +57,7 @@ export class AdminBillingComponent {
     this.billing = this.billing.filter(bill => bill.id !== id);
   }
 
-  
+
 
 
 }

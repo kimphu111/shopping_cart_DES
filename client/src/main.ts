@@ -9,6 +9,7 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { firebaseConfig } from './firebase-config';
 import {FirebaseTSApp} from 'firebasets/firebasetsApp/firebaseTSApp';
+import {HttpClientModule} from '@angular/common/http';
 
 if (environment.production) {
   enableProdMode();
@@ -21,7 +22,9 @@ bootstrapApplication(AppComponent, {
     provideRouter(routes),
     importProvidersFrom(
       AngularFireModule.initializeApp(firebaseConfig),
-      AngularFirestoreModule
-    )
+      AngularFirestoreModule,
+      HttpClientModule
+
+    ),
   ]
 }).catch(err => console.error(err));

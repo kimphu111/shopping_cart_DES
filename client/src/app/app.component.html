@@ -35,19 +35,22 @@
       </button>
     </div>
 
-    <a class="profile-btn" [routerLink]="['/login']" routerLinkActive="active"><mat-icon>person</mat-icon></a>
-    <div *ngIf="username; else loginButton" class="userInfo">
-        <span class="username" style="color:#ff20b3 ">Xin Chào, {{username}}</span>
+    <!-- Hiển thị nút profile nếu chưa đăng nhập -->
+    <a
+      *ngIf="!username"
+      class="profile-btn"
+      [routerLink]="['/login']"
+      routerLinkActive="active">
+      <mat-icon>person</mat-icon>
+    </a>
+
+    <!-- Hiển thị thông tin người dùng nếu đã đăng nhập -->
+    <div *ngIf="username" class="userInfo">
+      <span class="username" style="color:#ff20b3;">Xin Chào, {{ username }}</span>
       <button mat-icon-button (click)="logout()">
         <mat-icon>logout</mat-icon>
       </button>
     </div>
-
-    <ng-template #loginButton>
-<!--      <a class="profile-btn" [routerLink]="['/login']" routerLinkActive="active">-->
-<!--        <mat-icon>person</mat-icon>-->
-<!--      </a>-->
-    </ng-template>
   </div>
 
 </nav>

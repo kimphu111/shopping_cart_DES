@@ -1,21 +1,33 @@
 <div id="container">
-    <h3>Users</h3>
-    <div id="table-container">
-        <table class="user-table">
-            <thead>
-                <tr>
-                    <th>Username</th>
-                    <th>Email</th>
-                    <th>Password</th>
-                    <th>Status</th>
-                </tr>
-                <tr class="user-data" *ngFor="let user of users">
-                    <td class="user-info">{{ user.userName }}</td>
-                    <td class="user-info">{{ user.email }}</td>
-                    <td class="user-info">{{ user.password }}</td>
-                    <td class="user-info action-btn">{{user.status}}</td>
-                </tr>
-            </thead>
-        </table>
-    </div>
+  <h3>User Management</h3>
+  <div id="table-container">
+    <table class="user-table">
+      <thead>
+      <tr>
+        <th>Id</th>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Password</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let user of users" class="user-data">
+        <td>{{ user.id }}</td>
+        <td>{{ user.username }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.password }}</td>
+        <td>{{ user.status }}</td>
+
+        <td>
+          <button (click)="toggleStatus(user)">
+            {{ user.status === 'active' ? 'Block' : 'Unblock' }}
+          </button>
+        </td>
+
+      </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

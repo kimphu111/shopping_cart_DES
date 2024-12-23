@@ -30,17 +30,14 @@ app.use(helmet())
 app.use(cookieParser())
 app.use(useragent.express())
 
-//init databases
 mongodbConnect();
 connectRedis();
 sequelizeConnect();
 sequelizeSync();
 
-//init routers
 app.use('/', router);
 app.use('/', swagger);
 
-//init error handler
 app.use(errorHandler);
 
 

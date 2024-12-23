@@ -66,7 +66,6 @@ export class RegisterComponent {
       this.passwordError = null;
     }
   }
-
   onRegister() {
     this.errorMessage = null; // Reset thông báo lỗi trước khi gửi yêu cầu
     if (!this.username || !this.email || !this.password) {
@@ -74,23 +73,22 @@ export class RegisterComponent {
       return;
     }
 
-    // Kiểm tra trùng tên đăng nhập hoặc email từ danh sách giả định (trong trường hợp thực tế, bạn có thể gọi API kiểm tra)
     const existingUsers = [
-      { username: 'existingUser', email: 'existing@email.com' }, // Danh sách người dùng đã tồn tại (giả sử)
+      { username: 'kimphu098', email: 'existing@email.com' },
     ];
 
-    // Kiểm tra nếu username hoặc email đã tồn tại trong danh sách
     const usernameExists = existingUsers.some(user => user.username === this.username);
     const emailExists = existingUsers.some(user => user.email === this.email);
 
-    if (usernameExists) {
-      this.errorMessage = 'Tên đăng nhập đã tồn tại. Vui lòng chọn tên khác.';
-      return;  // Dừng việc gửi request và hiển thị lỗi
-    }
-
-    if (emailExists) {
-      this.errorMessage = 'Email đã tồn tại. Vui lòng chọn email khác.';
-      return;  // Dừng việc gửi request và hiển thị lỗi
+    if (usernameExists || emailExists) {
+      setTimeout(() => {
+        if (usernameExists) {
+          this.errorMessage = 'Tên đăng nhập đã tồn tại. Vui lòng chọn tên khác.';
+        } else if (emailExists) {
+          this.errorMessage = 'Email đã tồn tại. Vui lòng chọn email khác.';
+        }
+      }, 5000); // 5 giây delay
+      return;  // Dừng việc gửi request và hiển thị lỗi sau 5 giây
     }
 
     this.isLoading = true; // Bật spinner khi bắt đầu gửi request
@@ -110,19 +108,19 @@ export class RegisterComponent {
       .then((res) => {
         alert('Đăng ký thành công, vui lòng đăng nhập lại');
         this.router.navigate(['/']);
-      }).catch((err) => {
-      console.error('Lỗi từ backend:', err.response?.data);
+      })
+      .catch((err) => {
+        console.error('Lỗi từ backend:', err.response?.data);
 
-      setTimeout(() => {
-        if (err.response && err.response.data && err.response.data.error) {
-          this.errorMessage = err.response.data.error; // Lỗi từ backend (trùng username/email)
-        } else {
-          this.errorMessage = 'Đăng ký thất bại. Vui lòng thử lại.';
-        }
-      }, 5000); // 5 giây delay
-    })
-      .finally(() => {
-        this.isLoading = false; // Tắt spinner sau khi có kết quả
-      });
+        // Kiểm tra lỗi từ backend và hiển thị thông báo lỗi sau 5 giây
+        setTimeout(() => {
+          if (err.response && err.response.data && err.response.data.error) {
+            this.errorMessage = err.response.data.error; // Lỗi từ backend (trùng username/email)
+          } else {
+            this.errorMessage = 'Đăng ký thất bại. Vui lòng thử lại.';
+          }
+        }, 5000); // 5 giây delay
+      })
   }
+
 }

@@ -20,6 +20,8 @@ body, html {
   z-index: 1000;
   padding: 0 80px;
   box-sizing: border-box;
+  flex-wrap:nowrap;
+
 }
 
 
@@ -27,6 +29,7 @@ body, html {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
   img {
     width: 200px;
     height: 130px;
@@ -45,7 +48,8 @@ body, html {
   display: flex;
   justify-content: center;
   gap: 20px;
-  padding: 0 220px 0 300px;
+  //padding: 0 220px 0 300px;
+  padding-left: 70px;
 }
 
 .navbar-right {
@@ -53,6 +57,7 @@ body, html {
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  gap:10px;
 }
 
 
@@ -63,6 +68,7 @@ body, html {
   font-size: 22px;
   font-weight: 370;
   transition: 0.3s;
+
 }
 
 .navbar-center a:hover, .navbar-center a.active  {
@@ -218,17 +224,21 @@ body, html {
   }
 }
 
-.userInfo{
+.userInfo {
   display: flex;
   align-items: center;
   gap: 10px;
   font-size: 20px;
   color: white;
+  white-space: nowrap; /* Ngăn text xuống dòng */
+  overflow: hidden; /* Ẩn phần dư nếu vượt quá chiều rộng */
+  text-overflow: ellipsis; /* Thêm dấu "..." nếu text quá dài */
 }
 
 @media screen {
   .navbar {
     padding-left: 30px;
+    font-size: 10px;
   }
 
 }

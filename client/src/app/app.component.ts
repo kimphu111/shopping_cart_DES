@@ -59,10 +59,9 @@ export class AppComponent implements OnInit {
 
     if (isPlatformBrowser(this.platformId)) {
       const accessToken = localStorage.getItem('accessToken');
-      const currentUrl = this.route.url
-      const publicRoutes =  [ '/forgot-password', '/album1','/album2', '/home','/register', '/detail-product'];
+      const currentUrl = this.route.url;
+      const publicRoutes = ['/forgot-password', '/album1', '/album2', '/home', '/register'];
 
-      // Nếu đang ở một trong những route công khai, bỏ qua kiểm tra đăng nhập
       if (publicRoutes.some(route => currentUrl.startsWith(route))) {
         return;
       }
@@ -77,22 +76,26 @@ export class AppComponent implements OnInit {
         })
           .then((res) => {
             const { username, email } = res.data;
-            localStorage.setItem('email', email);  // Lưu email
-            localStorage.setItem('username', username);  // Lưu username
+            localStorage.setItem('email', email);
+            localStorage.setItem('username', username);
             alert('Chào mừng bạn đã quay trở lại');
           })
-          .catch(() => {
+          .catch((err) => {
+            if (err.response && err.response.status === 403) {
+              alert('Tài khoản của bạn đã bị khóa. Vui lòng liên hệ quản trị viên.');
+            } else {
+              alert('Phiên làm việc đã hết hạn');
+            }
             this.route.navigate(['/login']);
-            alert('Phiên làm việc đã hết hạn');
           });
       } else {
-        if(!publicRoutes.some(route => currentUrl.startsWith(route))){
+        if (!publicRoutes.some(route => currentUrl.startsWith(route))) {
           this.route.navigate(['/login']);
           alert('Vui lòng đăng nhập để tiếp tục');
         }
-
       }
     }
+
   }
 
   searchProducts(query: string) {
@@ -136,6 +139,8 @@ export class AppComponent implements OnInit {
     //   })
     //     // .then(r => console.log(r));
     // }
+
+
 
   }
   CheckUser(): void {

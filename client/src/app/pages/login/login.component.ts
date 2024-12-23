@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 import { AccountService } from '../../services/account.service';
 import CryptoJS from 'crypto-js';
 import { UserService } from '../../../service/user/user.service';
@@ -14,7 +14,8 @@ import { NgIf } from '@angular/common';
   templateUrl: './login.component.html',
   imports: [
     FormsModule,
-    NgIf
+    NgIf,
+    RouterLink
   ],
   styleUrl: './login.component.scss'
 })
@@ -28,7 +29,6 @@ export class LoginComponent {
   constructor(private router: Router,
               private userService: UserService,
   ) {}
-
   onLogin() {
     console.log('Email:', this.email);
     console.log('Password:', this.password);
@@ -39,7 +39,6 @@ export class LoginComponent {
     this.isLoading = true;
 
     setTimeout(() => {
-
       axios.post('http://localhost:8000/api/users/login', payloadOption, {
         headers: {
           'Content-Type': 'application/json',
@@ -51,9 +50,7 @@ export class LoginComponent {
         .then((data) => {
           this.isLoading = false;
           console.log(data);
-
           localStorage.setItem('accessToken', data.accessToken);
-
           const decodedToken = this.decodeJwt(data.accessToken);
           if (decodedToken) {
             this.username = decodedToken.user?.username;
@@ -64,13 +61,18 @@ export class LoginComponent {
         })
         .catch((error) => {
           this.isLoading = false;
-          console.error(error);
-          alert("Đăng nhập thất bại");
+          if (error.response && error.response.status === 403) {
+            alert('Tài khoản của bạn đã bị khóa. Vui lòng liên hệ quản trị viên.');
+          } else {
+            alert("Đăng nhập thất bại");
+          }
 
           window.location.reload();
         });
     }, 3500);
   }
+
+
 
   decodeJwt(token: string) {
     try {

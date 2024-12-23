@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AdminUserComponent } from './admin-user/admin-user.component';
+import { AdminUsersComponent } from './admin-user/admin-user.component';
 import { AdminBillingComponent } from './admin-billing/admin-billing.component';
+import {HttpClientModule} from '@angular/common/http';
 
 import { AdminComponent } from './admin.component';
 import { Admin_Routes } from './admin.routes';
@@ -13,9 +14,9 @@ import { Admin_Routes } from './admin.routes';
     CommonModule,
     Admin_Routes,
     AdminBillingComponent,
-    AdminUserComponent,
-    AdminBillingComponent,
-    AdminComponent
+    AdminUsersComponent,
+    AdminComponent,
+    HttpClientModule,
   ]
 })
 export class AdminModule { }

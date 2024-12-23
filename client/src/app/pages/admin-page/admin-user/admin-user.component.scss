@@ -1,59 +1,84 @@
 :host {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%; /* Ensure the host element takes up the full height */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  overflow-x: hidden; /* Ngăn tràn nội dung ngang */
 }
 
-#container{
-    width: 80%;
-    min-height: 50%;
-    background-color: transparent;
-    border: 2px solid rgba(255, 255, 255, 0.5);
-    border-radius: 20px;
-    backdrop-filter: blur(50px);
-    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
-    padding: 20px;
-    margin-left: auto;
-    margin-right: auto;
+#container {
+  width: 90%; /* Giảm chiều rộng để tránh tràn */
+  max-width: 1200px; /* Đặt giới hạn tối đa cho chiều rộng */
+  min-height: 50%;
+  background-color: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-radius: 20px;
+  backdrop-filter: blur(50px);
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+  margin: 0 auto; /* Căn giữa */
+  overflow: hidden; /* Ngăn tràn */
 }
-#container h3{
-    margin: 20px;
-    font-size: 2.5rem;
+
+#container h3 {
+  margin: 20px;
+  font-size: 2.5rem;
+  text-align: center; /* Căn giữa tiêu đề */
 }
-#table-container{
-    max-height: 500px; /* Set the maximum height for the table container */
-    overflow-y: auto; /* Enable vertical scrolling */
-    &::-webkit-scrollbar{
-        width: 10px;
-    }
-    &::-webkit-scrollbar-thumb{
-        background-color: rgba(255, 255, 255, 0.5);
-        border-radius: 10px;
-        border: 3px solid transparent; /* Space around the thumb */
-    }
-    &::-webkit-scrollbar-track{
-        background-color: transparent;
-    }
-    &::-webkit-scrollbar-thumb:hover{
-        background-color: rgba(114, 129, 86, 0.8);
-        //rgba(255, 255, 255, 0.7) /* Another color option*/
-    }
+
+#table-container {
+  max-height: 500px;
+  overflow-y: auto;
 }
-.user-table{
-    font-size: 1.3rem;
-    border-collapse: collapse;
-    width: 100%;
-    text-align: left;
+
+#table-container::-webkit-scrollbar {
+  width: 10px;
 }
-.user-table th, .user-table td{
-    padding: 30px 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+
+#table-container::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 10px;
+  border: 3px solid transparent;
 }
-.user-table th{
-    color: #3b3b3b;
+
+#table-container::-webkit-scrollbar-track {
+  background-color: transparent;
 }
+
+.user-table {
+  font-size: 1.3rem;
+  border-collapse: collapse;
+  width: 100%;
+  table-layout: fixed; /* Đảm bảo bảng không vượt quá chiều rộng container */
+  text-align: left;
+}
+
+.user-table th,
+.user-table td {
+  padding: 15px; /* Giảm padding để tránh tràn */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+  word-wrap: break-word; /* Đảm bảo nội dung không tràn ra ngoài ô */
+}
+
+.user-table th {
+  color: #3b3b3b;
+}
+
 .user-table .user-data:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-    cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+}
+
+button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 12px; /* Giảm kích thước nút để phù hợp hơn */
+  font-size: 0.9rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #0056b3;
 }

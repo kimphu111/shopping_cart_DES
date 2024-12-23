@@ -69,8 +69,6 @@ const login = asyncHandler(async (req, res) => {
     const ipAddress = req.ip || req.headers['x-forwarded-for'] || req.connection.remoteAddress;
     const userAgent = req.useragent;
 
-
-
     const time = String(
         DateTime.now().setZone("Asia/Ho_Chi_Minh").toFormat("yyyy-MM-dd HH:mm:ss")
     );
@@ -79,11 +77,21 @@ const login = asyncHandler(async (req, res) => {
         res.status(400);
         throw new Error("All fields are mandatory!");
     }
+
+    // Tìm user theo email
     const user = await UserSql.findOne({
         where: {
             email: email
         }
     });
+
+    // Kiểm tra trạng thái tài khoản
+    if (user && user.status === 'blocked') {
+        res.status(403).json({ message: "Tài khoản của bạn đã bị khóa. Vui lòng liên hệ quản trị viên." });
+        return;
+    }
+
+    // Kiểm tra mật khẩu
     if (user && (await bcrypt.compare(password, user.password))) {
         const accessToken = jwt.sign(
             {
@@ -99,8 +107,7 @@ const login = asyncHandler(async (req, res) => {
             }
         );
 
-        // generate refresh token
-
+        // Generate refresh token
         const refreshToken = jwt.sign(
             {
                 user: {
@@ -112,12 +119,11 @@ const login = asyncHandler(async (req, res) => {
             }, process.env.REFRESH_SECRET_KEY,
             {
                 expiresIn: "30d",
-
             }
         );
 
-
-        RefreshModel.create({
+        // Lưu refresh token vào cơ sở dữ liệu
+        await RefreshModel.create({
             email: user.email,
             username: user.username,
             deviceInfo: {
@@ -126,26 +132,27 @@ const login = asyncHandler(async (req, res) => {
             },
             token: refreshToken,
             time: time
-        })
+        });
 
-
-        // 30 * 24 * 60 * 60 * 1000 = 30 days
         res.cookie('refreshToken', refreshToken, {
             maxAge: 30 * 24 * 60 * 60 * 1000,
             httpOnly: true,
-            secure: true, //     true khi có https
-            sameSite: "none",// none khi có https
+            secure: true, // true khi có https
+            sameSite: "none", // none khi có https
             path: "/"
         });
+
+        // Trả về access token và refresh token
         res.status(200).json({
             accessToken,
             refreshToken
         });
     } else {
         res.status(401);
-        throw new Error("email or password is not valid")
+        throw new Error("Email hoặc mật khẩu không đúng");
     }
-})
+});
+
 
 
 
