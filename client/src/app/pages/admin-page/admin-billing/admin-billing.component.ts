@@ -4,7 +4,6 @@ import { BillingService } from '../../../../service/billing/billing.service';
 import { Billing } from '../../../models/billing.model';
 import { ProductService } from '../../../products.service';
 import { Product } from '../../../models/product.model';
-import { User } from '../../../models/user.model';
 import { UserService } from '../../../../service/user/user.service';
 
 @Component({
@@ -18,7 +17,9 @@ export class AdminBillingComponent {
 
   billing: Billing[] = [];
   product: Product  | null = null;
-  userName: User | null = null;
+  showConfirmPopup: boolean = false;
+  confirmBillingId: number = -1;
+  isLoading: boolean = false;
 
   constructor(private billingService: BillingService,
               private productService: ProductService,
@@ -26,38 +27,79 @@ export class AdminBillingComponent {
   ) {}
 
   ngOnInit(): void {
-    this.billingService.getBilling().subscribe(billing => {this.billing = billing});
-
-
-    this.productService.currentProduct.subscribe(product => {
-      if (product) {
-        this.addProductToBilling(product);
+    this.billingService.getAllBilling().subscribe(
+      (response: Billing[]) => {
+        this.billing = response;
+        // console.log('Dữ liệu thanh toán:', this.billing);
+      },
+      (err: any) => {
+        console.error('Lỗi khi tải dữ liệu thanh toán:', err);
       }
-    });
+    );
 
-    // this.userService.currentUser.subscribe(user => {
-    //   this.userName = user[0];
-    // });
-
+    this.getBillingData();
   }
 
-  addProductToBilling(product: any) {
-    const newBilling: Billing = {
-      id: this.billing.length + 1,
-      productName: product.name,
-      userName: this.userName?.userName || 'Unknown User',
-      phone: product.phoneNumber,
-      address: product.address,
-      date: new Date().toISOString()
-    };
-    this.billing.unshift(newBilling);
-  }
-
-  deleteBilling(id: number){
-    this.billing = this.billing.filter(bill => bill.id !== id);
+  getBillingData(): void {
+    this.billingService.getAllBilling().subscribe(
+      (response: Billing[]) => {
+        this.billing = response;
+        // console.log('Dữ liệu thanh toán:', this.billing);
+      },
+      (err: any) => {
+        console.error('Lỗi khi tải dữ liệu thanh toán:', err);
+      }
+    );
   }
 
 
+  deleteBilling(): void {
+    if (this.confirmBillingId !== -1) {
+      this.isLoading = true;
+      console.log("Bắt đầu xóa thanh toán với ID:", this.confirmBillingId);
+
+      this.billingService.deleteBilling(this.confirmBillingId).subscribe(
+        (response) => {
+          console.log('Đã xóa thanh toán thành công:', response);
+
+          setTimeout(() => {
+            console.log("Đang reload trang...");
+            this.isLoading = false; // Tắt spinner
+            alert("Xóa thanh toán thành công!");
+            window.location.reload();
+          }, 100);
+        },
+        (err: any) => {
+          console.error('Lỗi khi xóa thanh toán:', err);
+          this.isLoading = false; // Tắt spinner nếu có lỗi
+        }
+      );
+    } else {
+      console.error("Không có ID thanh toán để xóa");
+    }
+  }
+
+
+
+
+
+  openConfirmPopup(billingId: number): void {
+    this.confirmBillingId = billingId;
+    this.showConfirmPopup = true;
+  }
+
+  closeConfirmPopup(): void {
+    this.showConfirmPopup = false;
+    this.confirmBillingId = -1;
+  }
 
 
 }
+
+
+
+
+
+
+
+

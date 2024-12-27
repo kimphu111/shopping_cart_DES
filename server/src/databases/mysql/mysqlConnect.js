@@ -35,7 +35,7 @@ const sequelizeConnect = async () => {
 
 const sequelizeSync = async () => {
     try {
-        await sequelize.sync({ force: false }); // Đồng bộ tất cả model, không xóa dữ liệu cũ
+        await sequelize.sync({ force: false });
         console.log("Database & tables synced!");
     } catch (error) {
         console.error("Error syncing database:", error);

@@ -22,9 +22,9 @@ router.use('/users', adminRoute);
 
 router.get('/users', async (req, res) => {
     try {
-        const [users] = await db.query('SELECT * FROM users'); // Truy vấn bảng users từ MySQL
-        console.log("Fetched users:", users); // Log kết quả ra console
-        res.json(users); // Trả về dữ liệu người dùng dưới dạng JSON
+        const [users] = await db.query('SELECT * FROM users');
+        // console.log("du lieu get dc", users);
+        res.json(users);
     } catch (error) {
         console.error("Database query error:", error); // Log lỗi nếu có
         res.status(500).json({ message: 'Error fetching users', error });

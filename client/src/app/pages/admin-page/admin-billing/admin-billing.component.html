@@ -1,18 +1,33 @@
 <div id="container">
-    <h3>Billing information</h3>
-    <div id="table-container">
-        <div class="wrapper" *ngFor="let bill of billing">
-            <div class="header">
-                <h5>{{ bill.productName }}</h5>
-                <button class="btn" (click)="deleteBilling(bill.id)" >Delete</button>
-            </div>
+  <h3>Billing Information</h3>
+  <div id="table-container">
+    <div class="wrapper" *ngFor="let bill of billing">
+      <div class="header">
+        <h5>{{ bill.productName }}</h5>
+        <button class="btn" (click)="openConfirmPopup(bill.id)">Delete</button>
+      </div>
 
-            <div class="billing-info">
-                <p>User name: {{ bill.userName }}</p>
-                <p>Phone: {{ bill.phone }}</p>
-                <p>Address: {{ bill.address }}</p>
-                <p>Date: {{ bill.date}}</p>
-            </div>
-        </div>
+      <div class="billing-info">
+        <p>Id: {{ bill.id }}</p>
+        <p>User name: {{ bill.userName }}</p>
+        <p>Phone: {{ bill.phone }}</p>
+        <p>Address: {{ bill.address }}</p>
+        <p>Date: {{ bill.date }}</p>
+      </div>
     </div>
+  </div>
+</div>
+
+<!-- Popup xác nhận xóa -->
+<div *ngIf="showConfirmPopup" class="confirm-popup">
+  <p>Are you sure you want to delete this billing?</p>
+  <div class="popup-actions">
+    <button class="confirm-btn" (click)="deleteBilling()">✅</button>
+    <button class="cancel-btn" (click)="closeConfirmPopup()">❌</button>
+  </div>
+</div>
+
+<!-- Spinner Loading -->
+<div *ngIf="isLoading" class="spinner">
+  <div class="lds-dual-ring"></div>
 </div>

@@ -2,6 +2,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
 </head>
 
+
+
 <div id="container" *ngFor="let productItem of displayProducts">
   <div id="header">
 <!--    <span class="material-symbols-outlined">favorite</span>-->
@@ -57,6 +59,11 @@
     </div>
   </div>
 
+  <div id="loading" *ngIf="isLoading" class="loading-overlay">
+    <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+  </div>
+
+  <!-- Success Popup -->
   <div id="success-popup" *ngIf="showSuccessPopup">
     <div id="success-content">
       <div class="icon">
@@ -66,6 +73,6 @@
       <p>Cảm ơn bạn đã đặt hàng!</p>
       <button class="btn" (click)="closeSuccessPopup()">Đóng</button>
     </div>
+  </div>
+</div>
 
-</div>
-</div>
